@@ -1,5 +1,7 @@
 const Product = require("../Models/productModel.js");
 
+
+//Create Product => admin routes
 exports.createProduct = async(req,res,next) =>{
     try {
         const create = await Product.create(req.body);
@@ -14,11 +16,64 @@ exports.createProduct = async(req,res,next) =>{
             message : error
         })
     }
-
-
 }
-exports.getAllProducts = (req,res) =>{
+// createData
+exports.getAllProducts = async(req,res) =>{
+    const products = await Product.find()
     res.status(200).json({
-        message : "root is successfully"
+        success : true,
+        products 
     })
+}
+
+//updateProduct  only for admin
+exports.updateProduct = async(req,res,next)=>{
+    const {id} = req.params;
+    try {
+        const product = await Product.findById({_id : id});
+        if(!product){
+            return res.status(404).json({
+                message : "Product Is Not Found",
+                success : false
+            })
+        }
+        product = await Product.findByIdAndUpdate({_id : id}, req.body);
+        
+        res.status(200).json({
+            success : true,
+            product
+        })
+        
+    } catch (error) {
+        res.status(500).json({
+            success : false,
+            error
+        })
+    }
+}
+
+exports.deleteProduct = async (req,res,next) =>{
+    try {
+        const {id} = req.params;
+
+        const product = await Product.findById(id);
+
+        if(!product){
+            res.status(404).json({
+                success : false,
+                message : "Product Not Found"
+            })
+        }
+            await Product.findByIdAndDelete(id);
+            res.status(200).json({
+                success : true,
+                message : "Delete the Product"
+            })
+        
+    } catch (error) {
+        res.status(500).json({
+            message : false,
+            error
+        })
+    }
 }
