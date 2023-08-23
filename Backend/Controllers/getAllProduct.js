@@ -13,7 +13,7 @@ exports.createProduct = async(req,res,next) =>{
     } catch (error) {
         res.status(500).json({
             success : false,
-            message : error
+            message : error.message
         })
     }
 }
@@ -59,7 +59,7 @@ exports.deleteProduct = async (req,res,next) =>{
         const product = await Product.findById(id);
 
         if(!product){
-            res.status(404).json({
+            return res.status(404).json({
                 success : false,
                 message : "Product Not Found"
             })
@@ -84,7 +84,7 @@ exports.getProductDetails = async( req,res ) =>{
         const product = await Product.findById(id);
 
         if (!product) {
-            res.status(404).json({
+            return res.status(404).json({
                 message : "Product Not Found",
                 success : false
             })
@@ -97,7 +97,7 @@ exports.getProductDetails = async( req,res ) =>{
     } catch (error) {
         res.status(500).json({
             success : false,
-            error
+            message : error.message
         })
     }
 }
