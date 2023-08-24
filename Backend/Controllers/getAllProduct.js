@@ -52,7 +52,7 @@ exports.updateProduct = async (req, res, next) => {
 };
 
 exports.deleteProduct = async (req, res, next) => {
-//   try {
+  try {
     const { id } = req.params;
 
     const product = await Product.findById(id);
@@ -68,28 +68,29 @@ exports.deleteProduct = async (req, res, next) => {
       success: true,
       message: "Delete the Product",
     });
-//   } catch (error) {
-//     res.status(500).json({
-//       message: false,
-//       error,
-//     });
-//   }
+  } catch (error) {
+    res.status(500).json({
+      message: false,
+      error,
+    });
+  }
 };
 
 exports.getProductDetails = async (req, res, next) => {
-  const { id } = req.params;
-
-  const product = await Product.findById(id);
-  console.log(product);
-
-  if (!product) {
-    return res.status(500).json({
-        success : false,
-        message : "Product Not Found"
-    })
-  }
-  res.status(200).json({
-    success: true,
-    product,
-  });
-}
+    const { id } = req.params;
+  
+    
+      const product = await Product.findById(id).exec();
+      console.log(product);
+  
+      if (!product) {
+        return next(new ErrorHander ("Product Not Found",404));
+      }
+  
+      res.status(200).json({
+        success: true,
+        product,
+    });
+    
+ };
+  
