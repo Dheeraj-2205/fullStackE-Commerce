@@ -4,11 +4,11 @@ const {config} = require("dotenv");
 const connectDb = require("./config/database.js");
 
 // Uncaught error On top
-process.on("uncaughtException",(err)=>{
-    console.log(`Error : ${err.message}`);
-    console.log(`due to uncaught error server is shut down :) :) :)`);
-    process.exit(1);
-})
+// process.on("uncaughtException",(err)=>{
+//     console.log(`Error : ${err.message}`);
+//     console.log(`due to uncaught error server is shut down :) :) :)`);
+//     process.exit(1);
+// })
 
 
 config({
@@ -23,11 +23,11 @@ const server = app.listen(process.env.PORT, ()=>{
 
 // unhandle promise rejection bottom
 
-process.on("unhandledRejection", (err) =>{
-    console.log(`Error : ${err.message}`);
-    console.log(`Shut down due to unhandle promise rejection :) :) :)`);
+// process.on("unhandledRejection", (err) =>{
+//     console.log(`Error : ${err.message}`);
+//     console.log(`Shut down due to unhandle promise rejection :) :) :)`);
 
-    server.close(()=>{
-        process.exit(1);
-    })
-})
+//     server.close(()=>{
+//         process.exit(1);
+//     })
+// })

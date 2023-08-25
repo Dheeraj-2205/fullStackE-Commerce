@@ -51,11 +51,10 @@ exports.deleteProduct = AsyncResolver(async (req, res, next) => {
   });
 });
 
-exports.getProductDetails = async (req, res, next) => {
+exports.getProductDetails = AsyncResolver(async (req, res, next) => {
   const { id } = req.params;
 
-  const product = await Product.findById(id).exec();
-  console.log(product);
+  const product = await Product.findById(id);
 
   if (!product) {
     return next(new ErrorHander("Product Not Found", 404));
@@ -65,4 +64,4 @@ exports.getProductDetails = async (req, res, next) => {
     success: true,
     product,
   });
-};
+});
