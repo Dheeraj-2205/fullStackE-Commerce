@@ -9,6 +9,17 @@ config({
 // always call after config
 connectDb();
 
-app.listen(process.env.PORT, ()=>{
+const server = app.listen(process.env.PORT, ()=>{
     console.log(`Port is listening ${process.env.PORT}`);
+});
+
+
+
+process.on("unhandledRejection", (err) =>{
+    console.log(`Error : ${err.message}`);
+    console.log(`Shut down due to unhandle promise rejection :) :) :)`);
+
+    server.close(()=>{
+        process.exit(1);
+    })
 })

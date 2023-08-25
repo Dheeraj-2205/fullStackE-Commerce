@@ -6,9 +6,6 @@ const connectDb = () =>{
     .then((data)=>{
         console.log(`db is connected successfully ${data.connection.host}`);
     })
-    .catch((e) =>{
-        console.log(`Opps something got error ${e}` );
-    })
 }
 
 module.exports = connectDb;
