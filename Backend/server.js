@@ -8,6 +8,7 @@ config({
 })
 // always call after config
 connectDb();
+
 app.listen(process.env.PORT, ()=>{
     console.log(`Port is listening ${process.env.PORT}`);
 })
