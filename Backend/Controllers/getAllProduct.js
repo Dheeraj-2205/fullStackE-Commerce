@@ -10,10 +10,6 @@ exports.createProduct = AsyncResolver(async (req, res, next) => {
     create,
   });
 
-  res.status(500).json({
-    success: false,
-    message: error.message,
-  });
 });
 // createData
 exports.getAllProducts = AsyncResolver(async (req, res) => {
@@ -30,7 +26,7 @@ exports.updateProduct = AsyncResolver(async (req, res, next) => {
 
   const product = await Product.findById({ _id: id });
   if (!product) {
-    return new ErrorHander("Product Not Found", 404);
+    return next(new ErrorHander("Product Not Found", 404));
   }
   product = await Product.findByIdAndUpdate({ _id: id }, req.body);
 
@@ -46,7 +42,7 @@ exports.deleteProduct = AsyncResolver(async (req, res, next) => {
   const product = await Product.findById(id);
 
   if (!product) {
-    return new ErrorHander("Product Not Found", 404);
+    return next(new ErrorHander("Product Not Found", 404));
   }
   await Product.findByIdAndDelete(id);
   res.status(200).json({

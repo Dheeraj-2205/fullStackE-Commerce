@@ -3,6 +3,14 @@ const app = require("./app.js");
 const {config} = require("dotenv");
 const connectDb = require("./config/database.js");
 
+// Uncaught error On top
+process.on("uncaughtException",(err)=>{
+    console.log(`Error : ${err.message}`);
+    console.log(`due to uncaught error server is shut down :) :) :)`);
+    process.exit(1);
+})
+
+
 config({
     path : "backend/config/config.env"
 })
@@ -13,7 +21,7 @@ const server = app.listen(process.env.PORT, ()=>{
     console.log(`Port is listening ${process.env.PORT}`);
 });
 
-
+// unhandle promise rejection bottom
 
 process.on("unhandledRejection", (err) =>{
     console.log(`Error : ${err.message}`);
