@@ -15,12 +15,19 @@ exports.createProduct = AsyncResolver(async (req, res, next) => {
 // createData
 exports.getAllProducts = AsyncResolver(async (req, res) => {
 
-  const apiFeature = new ApiFeatures(Product.find(),req.query).search();
+  const productCount = await Product.countDocument();
+  const pageNo = 10;
+
+  const apiFeature = new ApiFeatures(Product.find(),req.query)
+  .search()
+  .filter()
+  .pagination(pageNo);
   const products = await apiFeature.query
 
   res.status(200).json({
     success: true,
     products,
+    productCount
   });
 });
 

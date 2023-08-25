@@ -3,34 +3,49 @@ class ApiFeatures {
         this.query = query;
         this.queryStr = queryStr
     }
-
     search(){
         const keyword = this.queryStr.q ? {
             name : {
                 $regex : this.queryStr.q,
                 $options : "i"
             }
-        }:{
-
-        };
-
-        console.log(keyword);
-
+        }:{}
         this.query = this.query.find({...keyword});
 
         return this;
-
     }
-
     filter(){
         const queryCopy = {...this.queryStr};
-        console.log(queryCopy);
         // removing fields for category
 
-        const removeFieds = ["limit","keyword","page"];
+        const removeFields = ["limit","keyword","q","page"];
 
-        removeFieds.forEach(key => delete queryCopy[key]);
-        console.log(queryCopy);
+        removeFields.forEach(key => delete queryCopy[key]);
+
+        // filter for price and rating
+        
+        // console.log(queryCopy);
+
+        let queryStr = JSON.stringify(queryCopy);
+
+        queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, (key) => `$${key}`);
+
+        // product.find()
+
+        this.query = this.query.find(JSON.parse(queryStr));
+        return this;
+    }
+
+    pagination(resultPerPage){
+        const currentPage = Number(this.queryStr.page) || 1;
+
+        // 10 * 2-1   => 10 * 1 = 10 skipped start with 11 number
+
+        const skip = resultPerPage * (currentPage - 1);
+        
+        this.query = this.query.limit(resultPerPage).skip(skip);
+
+        return this;
     }
 }
 
