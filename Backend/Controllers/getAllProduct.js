@@ -2,6 +2,7 @@ const Product = require("../Models/productModel.js");
 const ErrorHander = require("../utils/errorHandling");
 const AsyncResolver = require("../middleware/asyncError.js");
 const ApiFeatures = require("../utils/apiFeature.js");
+const Newidea = require("../utils/apiFeature.js");
 //Create Product => admin routes
 exports.createProduct = AsyncResolver(async (req, res, next) => {
   const create = await Product.create(req.body);
@@ -13,23 +14,35 @@ exports.createProduct = AsyncResolver(async (req, res, next) => {
 
 });
 // createData
-exports.getAllProducts = AsyncResolver(async (req, res) => {
+// exports.getAllProducts = AsyncResolver(async (req, res) => {
 
-  const productCount = await Product.countDocument();
-  const pageNo = 10;
+//   const productCount = await Product.countDocument();
+//   const pageNo = 10;
 
-  const apiFeature = new ApiFeatures(Product.find(),req.query)
-  .search()
-  .filter()
-  .pagination(pageNo);
-  const products = await apiFeature.query
+//   const apiFeature = new ApiFeatures(Product.find(),req.query)
+//   .search()
+//   .filter()
+//   .pagination(pageNo);
+//   const products = await apiFeature.query
+
+//   res.status(200).json({
+//     success: true,
+//     products,
+//     productCount
+//   });
+// });
+
+exports.getAllProducts = AsyncResolver(async(req,res)=>{
+
+  const api = new Newidea(Product.find(),req.query).search();
+
+  const products = await api.query;
 
   res.status(200).json({
-    success: true,
-    products,
-    productCount
-  });
-});
+    success : true,
+    products
+  })
+})
 
 //updateProduct  only for admin
 exports.updateProduct = AsyncResolver(async (req, res, next) => {
