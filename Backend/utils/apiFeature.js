@@ -30,7 +30,7 @@
 
 //         queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, (key) => `$${key}`);
 
-//         // product.find()
+//         // product.find() == this.query
 
 //         this.query = this.query.find(JSON.parse(queryStr));
 //         return this;
@@ -50,30 +50,54 @@
 // }
 
 // module.exports = ApiFeatures;
-
-
-
-class Newidea{
+class Newidea {
     constructor(query,queryStr){
-        this.query = query;
+        this.query = query,
         this.queryStr = queryStr
     }
 
     search(){
-        const keyword = this.queryStr.q ? 
-        {
+        const keyword = this.queryStr.q ? {
             name : {
                 $regex : this.queryStr.q,
                 $options : "i"
             }
         } : {}
-        this.query = this.query.find({...keyword});
-        return this;
-    }
-    
-}
-module.exports = Newidea;
 
+        this.query = this.query.find({...keyword});
+        return this
+    }
+
+    filter(){
+        const clonequery = {...this.queryStr};
+
+        const removeFields = ["q","limit","page"];
+
+        removeFields.forEach((e) => delete clonequery[e]);
+        
+        let queryStr = JSON.stringify(clonequery);
+        queryStr = queryStr.replace(/\b(lt|gt|gte|lte)\b/g , key => `$${key}`);
+
+        this.query = this.query.find(JSON.parse(queryStr));
+        return this
+
+    }    
+}
+module.exports = Newidea
+// const queryCopy = {...this.queryStr};
+
+// const removingFields = ["limit", "q" , "page"];
+
+// removingFields.forEach(e => delete queryCopy[e])
+
+// let queryStr = JSON.stringify(queryCopy);
+// queryStr = queryStr.replace(/\b(lt|gt|gte|lte)\b/g, (key) => `$${key}`)
+
+// this.query = this.query.find(JSON.parse(queryStr));
+
+// console.log(queryStr);
+
+// return this
 // search(){
 //             const keyword = this.queryStr.q ? {
 //                 name : {

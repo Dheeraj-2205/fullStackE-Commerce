@@ -32,17 +32,28 @@ exports.createProduct = AsyncResolver(async (req, res, next) => {
 //   });
 // });
 
+// exports.getAllProducts = AsyncResolver(async(req,res)=>{
+
+//   const api = new Newidea(Product.find(),req.query).search();
+
+//   const products = await api.query;
+
+//   res.status(200).json({
+//     success : true,
+//     products
+//   })
+// })
+
 exports.getAllProducts = AsyncResolver(async(req,res)=>{
-
-  const api = new Newidea(Product.find(),req.query).search();
-
+  const api = new Newidea (Product.find() , req.query)
+  .search()
+  .filter();
   const products = await api.query;
-
   res.status(200).json({
-    success : true,
     products
   })
 })
+
 
 //updateProduct  only for admin
 exports.updateProduct = AsyncResolver(async (req, res, next) => {
