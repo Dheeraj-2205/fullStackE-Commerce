@@ -14,45 +14,24 @@ exports.createProduct = AsyncResolver(async (req, res, next) => {
 
 });
 // createData
-// exports.getAllProducts = AsyncResolver(async (req, res) => {
 
-//   const productCount = await Product.countDocument();
-//   const pageNo = 10;
+exports.getAllProducts = AsyncResolver(async (req, res) => {
 
-//   const apiFeature = new ApiFeatures(Product.find(),req.query)
-//   .search()
-//   .filter()
-//   .pagination(pageNo);
-//   const products = await apiFeature.query
+  // const productCount = await Product.countDocument();
+  const perPage = 10;
 
-//   res.status(200).json({
-//     success: true,
-//     products,
-//     productCount
-//   });
-// });
-
-// exports.getAllProducts = AsyncResolver(async(req,res)=>{
-
-//   const api = new Newidea(Product.find(),req.query).search();
-
-//   const products = await api.query;
-
-//   res.status(200).json({
-//     success : true,
-//     products
-//   })
-// })
-
-exports.getAllProducts = AsyncResolver(async(req,res)=>{
-  const api = new Newidea (Product.find() , req.query)
+  const apiFeature = new ApiFeatures(Product.find(),req.query)
   .search()
-  .filter();
-  const products = await api.query;
+  .filter()
+  .pagination(perPage);
+  const products = await apiFeature.query
+
   res.status(200).json({
-    products
-  })
-})
+    success: true,
+    products,
+  });
+});
+
 
 
 //updateProduct  only for admin
