@@ -1,7 +1,9 @@
 
+const asyncError = require("../middleware/asyncError.js");
 const Asynchandler = require("../middleware/asyncError.js");
 const User = require ("../Models/userModel.js");
 const ErrorHandler = require("../utils/errorHandling.js");
+const sendToken = require("../utils/jwtToken.js");
 
 // register
 
@@ -15,11 +17,7 @@ exports.register = Asynchandler(async(req,res,next)=>{
             url : "profile pic url "
         }
     })
-    const token = user.getJwtToken();      //now this is user part
-    return res.status(201).json({
-        success : true,
-        token
-    })
+    sendToken(user,201,res);
 });
 
 // Login
@@ -43,13 +41,20 @@ exports.loginUser = Asynchandler(async(req,res,next)=>{
         return next(new ErrorHandler("Please Enter Valid Email And Password",401));
     }
 
-    const token = await user.getJwtToken();
-
-    return res.status(200).json({
-        success : true,
-        token
-    })
+    sendToken(user,200,res);
 
 })
 
+// logout
 
+exports.logout = Asynchandler (async(req,res,next)=>{
+    res.cookie("token", null ,{
+        httpOnly : true,
+        expires : new Date(Date.now())
+    })
+    res.status(200).json({
+        success: true,
+        message : "Logout Successfully"
+
+    })
+})
