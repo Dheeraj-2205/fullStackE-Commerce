@@ -3,10 +3,16 @@ const ErrorHander = require("../utils/errorHandling");
 const AsyncResolver = require("../middleware/asyncError.js");
 const ApiFeatures = require("../utils/apiFeature.js");
 const Newidea = require("../utils/apiFeature.js");
+
+
 //Create Product => admin routes
+
+
 exports.createProduct = AsyncResolver(async (req, res, next) => {
-  req.body.user = req.user.id
+
+  req.body.user = req.user.id;
   const create = await Product.create(req.body);
+
   res.status(201).json({
     success: true,
     message: "Product is Created Successfully ",
