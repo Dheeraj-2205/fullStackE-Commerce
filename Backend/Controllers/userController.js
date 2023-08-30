@@ -58,3 +58,13 @@ exports.logout = Asynchandler (async(req,res,next)=>{
 
     })
 })
+
+
+exports.forgetPassword = Asynchandler(async(req,res,next)=>{
+    const user= await User.findById({email : req.body.email});
+
+    if(!user){
+        return next(new ErrorHandler("User Not Found" , 404));
+    }
+    const resetToken = User.resetPasswordToken()
+})
