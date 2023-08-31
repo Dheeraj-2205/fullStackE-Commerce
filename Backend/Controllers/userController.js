@@ -78,23 +78,23 @@ exports.forgetPassword = Asynchandler(async(req,res,next)=>{
     const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\n If you have not requested this email
     // then please ignore it`;
 
-    // try {
-    //     await sendEmail ({
-    //         email : user.email,
-    //         subject : `Ecommerce Password Reset`,
-    //         message
-    //     })
-    //     res.status(200).json({
-    //         success : true,
-    //         message : `Email sent ${user.email} successfully`
-    //     })
-    // } catch (error) {
-    //     user.resetPasswordExpire = undefined;
-    //     user.resetPasswordToken = undefined;
-    //     await uesr.save({validateBeforeSave :false})
-    //     return next(new ErrorHandler (error.message , 500));
-    // }
+    try {
+        await sendEmail ({
+            email : user.email,
+            subject : `Ecommerce Password Reset`,
+            message
+        })
+        res.status(200).json({
+            success : true,
+            message : `Email sent ${user.email} successfully`
+        })
+    } catch (error) {
+        user.resetPasswordExpire = undefined;
+        user.resetPasswordToken = undefined;
+        await uesr.save({validateBeforeSave :false})
+        return next(new ErrorHandler (error.message , 500));
+    }
 
-    await sendEmail(User.email,"Eccommerce websiteReset Pass",message)
+    // await sendEmail(user.email,"Eccommerce websiteReset Pass",message)
 
 })
