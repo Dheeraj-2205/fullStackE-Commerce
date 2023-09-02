@@ -1,10 +1,12 @@
 
+const { send } = require("process");
 const Asynchandler = require("../middleware/asyncError.js");
 const User = require ("../Models/userModel.js");
 const ErrorHandler = require("../utils/errorHandling.js");
 const sendToken = require("../utils/jwtToken.js");
 const sendEmail = require("../utils/sendEmail.js");
-
+const crypto = require('crypto');
+const asyncError = require("../middleware/asyncError.js");
 // register
 
 exports.register = Asynchandler(async(req,res,next)=>{
@@ -67,13 +69,12 @@ exports.forgetPassword = Asynchandler(async(req,res,next)=>{
         return next(new ErrorHandler("User Not Found" , 404));
     }
     
-
     // getReset Password tOken
-    const resetToken = user.getResetPasswordToken();
+    const resetToken = await user.getResetPasswordToken();
 
-    await user.save({validateBeforeSave : false});
+    await user.save({validateBeforeSave: false });
 
-    const resetPasswordUrl = `${req.protocol}://${req.get("host")}/mern/password/reset/${resetToken}`
+    const resetPasswordUrl = `<a>${req.protocol}://${req.get("host")}/mern/password/reset/${resetToken}</a>`
 
     const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\n If you have not requested this email
      then please ignore it`;
@@ -91,10 +92,39 @@ exports.forgetPassword = Asynchandler(async(req,res,next)=>{
     } catch (error) {
         user.resetPasswordExpire = undefined;
         user.resetPasswordToken = undefined;
-        await uesr.save({validateBeforeSave :false})
+        await user.save({validateBeforeSave :false})
+
         return next(new ErrorHandler (error.message , 500));
     }
 
-    // await sendEmail(user.email,"Eccommerce websiteReset Pass",message)
-
 })
+
+exports.resetPassword = Asynchandler(async(req,res,next)=>{
+    const {token} = req.params;
+    const resetPasswordToken = crypto.
+        createHash("sha256")
+        .update(token)
+        .digest("hex")
+    const user = await User.findOne({
+        resetPasswordToken,
+        resetPasswordExpire : {$gt : Date.now()}
+    });
+    console.log(user);
+    if(!user){
+        return next(new ErrorHandler("Token is invalid or has been expired", 400));
+    }
+
+    if(req.body.password !== req.body.confirmPassword){
+        return next(new ErrorHandler(" Password did not match",400));
+    }
+    user.password = req.body.password
+    user.resetPasswordExpire = undefined;
+    user.resetPasswordToken = undefined;
+
+    await user.save();
+
+    sendToken(user,200,res);
+})
+
+
+
