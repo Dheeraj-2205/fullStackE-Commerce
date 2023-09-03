@@ -137,6 +137,7 @@ exports.getUserDetails = Asynchandler(async(req,res,next)=>{
 exports.updatePasword = Asynchandler(async(req,res,next)=>{
     const user = await User.findById(req.user.id).select("+password");
 
+    console.log(user);
     const isPasswordMatch = await user.comparePassword(req.body.oldPassword);
 
     if(!isPasswordMatch){
@@ -146,8 +147,9 @@ exports.updatePasword = Asynchandler(async(req,res,next)=>{
     if(req.body.newPassword !== req.body.confirmPassword){
         return next(`Password does not match`, 400)
     };
+    console.log(req.body.newPassword);
 
-    user.password = newPassword;
+    user.password = req.body.newPassword;
     await user.save();
 
     sendToken(user,500,res);
