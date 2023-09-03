@@ -129,11 +129,8 @@ exports.resetPassword = Asynchandler(async(req,res,next)=>{
 // get user details
 exports.getUserDetails = Asynchandler(async(req,res,next)=>{
     const user = await User.findById(req.user.id);      //the route only whose login first
-    console.log(user);
-    return res.status(200).json({
-        success : true,
-        user
-    })
+    
+    sendToken(user,200,res)
 }) 
 
 
@@ -141,13 +138,19 @@ exports.updatePasword = Asynchandler(async(req,res,next)=>{
     const user = await User.findById(req.user.id).select("+password");
 
     const isPasswordMatch = await user.comparePassword(req.body.oldPassword);
-    console.log(user);
 
     if(!isPasswordMatch){
         return next(`Email and Password is invalid`, 400);
     };
 
-    if(req.body.newPassword)
+    if(req.body.newPassword !== req.body.confirmPassword){
+        return next(`Password does not match`, 400)
+    };
+
+    user.password = newPassword;
+    await user.save();
 
     sendToken(user,500,res);
+
+    // 3 key value pair in post method
 })
