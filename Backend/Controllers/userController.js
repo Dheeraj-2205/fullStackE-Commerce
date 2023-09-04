@@ -130,48 +130,58 @@ exports.resetPassword = Asynchandler(async(req,res,next)=>{
 exports.getUserDetails = Asynchandler(async(req,res,next)=>{
     const user = await User.findById(req.user.id);      //the route only whose login first
     
-    sendToken(user,200,res)
+    res.status(200).json({
+        success : true,
+        user
+    })
 }) 
 
 
-// exports.updatePassword = Asynchandler(async(req,res,next)=>{
-
-//     const user = await User.findById(req.user.id).select("+password");
-
-//     const isPasswordMatch = await user.comparePassword(req.body.oldPassword);
-
-
-//     if(!isPasswordMatch){
-//         return next(new ErrorHandler(`oldPassword is invalid`, 400));
-//     };
-
-//     if(req.body.newPassword !== req.body.confirmPassword){
-//         return next(new ErrorHandler(`Password does not match`, 400));
-//     };
-
-//     user.password = req.body.newPassword;
-//     await user.save();
-
-//     sendToken(user,500,res);
-
-//     // 3 key value pair in post method
-// });
-
 exports.updatePassword = Asynchandler(async(req,res,next)=>{
-    const user = await User.findById(req.user.id);
+
+    const user = await User.findById(req.user.id).select("+password");
 
     const isPasswordMatch = await user.comparePassword(req.body.oldPassword);
 
+
     if(!isPasswordMatch){
-        return next(new ErrorHandler(`old password does not match`,400));
+        return next(new ErrorHandler(`oldPassword is invalid`, 400));
     };
 
-    if(req.body.confirmPassword !== req.body.newPassword){
-        return next (new ErrorHandler(`New Password does not match`, 400));
-    }
+    if(req.body.newPassword !== req.body.confirmPassword){
+        return next(new ErrorHandler(`Password does not match`, 400));
+    };
 
     user.password = req.body.newPassword;
     await user.save();
 
     sendToken(user,500,res);
+
+    // 3 key value pair in post method
+});
+
+exports.updateProfile = Asynchandler(async(req,res,next)=>{
+    const newUserData = {
+        name :req.body.name,
+        email :req.body.email,
+    }
+// cloudinary add remaining
+    const user = await User.findByIdAndUpdate(req.user.id,newUserData,{
+        new : true,
+        runValidators : true,
+        useFindAndModify : false
+    })
+
+    res.status(200).json({
+        success : true,
+    })
+})
+
+// get all users
+exports.getAllUser = Asynchandler(async(req,res,next)=>{
+    const users = await User.find();
+    res.status(200).json({
+        success : true,
+        users
+    })
 })
