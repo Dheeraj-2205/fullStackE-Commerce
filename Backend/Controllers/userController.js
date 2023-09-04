@@ -177,7 +177,8 @@ exports.updateProfile = Asynchandler(async(req,res,next)=>{
     })
 })
 
-// get all users
+// get all users admin
+
 exports.getAllUser = Asynchandler(async(req,res,next)=>{
     const users = await User.find();
     res.status(200).json({
@@ -185,3 +186,35 @@ exports.getAllUser = Asynchandler(async(req,res,next)=>{
         users
     })
 })
+
+// get Single  user by admin
+
+exports.getSingleUser = Asynchandler(async(req,res,next)=>{
+    const user = await User.findById(req.params.id);
+
+    if(!user){
+        return next(new ErrorHandler("User does not exist in this id " + req.params.id), 400);
+    }
+
+    res.status(200).json({
+        success : true,
+        user
+    })
+})
+
+//  update user by admin
+
+exports.updateProfile = Asynchandler(async(req,res)=>{
+
+    const newUserData = {
+        name : req.body.name,
+        email : req.body.email,
+        role : req.body.role
+    }
+    const user =await User.findByIdAndUpdate(req.params.id, newUserData);
+
+    res.status(200).json({
+        success : true,
+    })
+
+});
