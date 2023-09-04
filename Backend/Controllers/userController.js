@@ -134,25 +134,44 @@ exports.getUserDetails = Asynchandler(async(req,res,next)=>{
 }) 
 
 
-exports.updatePasword = Asynchandler(async(req,res,next)=>{
-    const user = await User.findById(req.user.id).select("+password");
+// exports.updatePassword = Asynchandler(async(req,res,next)=>{
 
-    console.log(user);
+//     const user = await User.findById(req.user.id).select("+password");
+
+//     const isPasswordMatch = await user.comparePassword(req.body.oldPassword);
+
+
+//     if(!isPasswordMatch){
+//         return next(new ErrorHandler(`oldPassword is invalid`, 400));
+//     };
+
+//     if(req.body.newPassword !== req.body.confirmPassword){
+//         return next(new ErrorHandler(`Password does not match`, 400));
+//     };
+
+//     user.password = req.body.newPassword;
+//     await user.save();
+
+//     sendToken(user,500,res);
+
+//     // 3 key value pair in post method
+// });
+
+exports.updatePassword = Asynchandler(async(req,res,next)=>{
+    const user = await User.findById(req.user.id);
+
     const isPasswordMatch = await user.comparePassword(req.body.oldPassword);
 
     if(!isPasswordMatch){
-        return next(`Email and Password is invalid`, 400);
+        return next(new ErrorHandler(`old password does not match`,400));
     };
 
-    if(req.body.newPassword !== req.body.confirmPassword){
-        return next(`Password does not match`, 400)
-    };
-    console.log(req.body.newPassword);
+    if(req.body.confirmPassword !== req.body.newPassword){
+        return next (new ErrorHandler(`New Password does not match`, 400));
+    }
 
     user.password = req.body.newPassword;
     await user.save();
 
     sendToken(user,500,res);
-
-    // 3 key value pair in post method
 })
