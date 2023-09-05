@@ -87,3 +87,7 @@ exports.getProductDetails = AsyncResolver(async (req, res, next) => {
     product,
   });
 });
+
+exports.createProductReview = AsyncResolver(async(req,res,next)=>{
+  
+})

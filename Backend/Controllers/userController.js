@@ -204,7 +204,7 @@ exports.getSingleUser = Asynchandler(async(req,res,next)=>{
 
 //  update user by admin
 
-exports.updateProfile = Asynchandler(async(req,res)=>{
+exports.updateUser = Asynchandler(async(req,res,next)=>{
 
     const newUserData = {
         name : req.body.name,
@@ -213,8 +213,25 @@ exports.updateProfile = Asynchandler(async(req,res)=>{
     }
     const user =await User.findByIdAndUpdate(req.params.id, newUserData);
 
+    if(!user){
+        return next(new ErrorHandler("User does not exist",400));
+    }
     res.status(200).json({
         success : true,
     })
 
 });
+// delete user by admin
+exports.deleteUser = Asynchandler(async(req,res,next)=>{
+
+    const user = await User.findById(req.params.id);
+
+    if(!user){
+        return next(new ErrorHandler(`User does not exist in this id :- ${req.params.id}`));
+    };
+    await user.deleteOne();
+    res.status(200).json({
+        success: true
+    });
+    
+})

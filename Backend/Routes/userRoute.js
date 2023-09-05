@@ -1,5 +1,5 @@
 const express = require("express");
-const { register, loginUser, logout, forgetPassword, resetPassword, getUserDetails, updatePassword, updateProfile, getSingleUser, getAllUser } = require("../Controllers/userController");
+const { register, loginUser, logout, forgetPassword, resetPassword, getUserDetails, updatePassword, updateProfile, getSingleUser, getAllUser, updateUser, deleteUser } = require("../Controllers/userController");
 const { Authentication, authorizeRole } = require("../middleware/auth");
 
 const router = express.Router();
@@ -17,7 +17,11 @@ router.route("/me/update/profile").put(Authentication,updateProfile)
 router.route("/forget/password").post(forgetPassword);
 
 router.route("/password/reset/:token").put(resetPassword);
-router.route("/admin/user/:id").get(Authentication,authorizeRole("admin"),getSingleUser);
+router.route("/admin/user/:id")
+.get(Authentication,authorizeRole("admin"),getSingleUser)
+.put(Authentication,authorizeRole("admin"),updateUser)
+.delete(Authentication,authorizeRole("admin"),deleteUser);
+
 
 router.route("/admin/allusers").get(Authentication,authorizeRole("admin"),getAllUser)
 router.route("/logout").get(logout);
