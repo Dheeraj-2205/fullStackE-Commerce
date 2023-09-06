@@ -26,7 +26,7 @@ exports.createProduct = AsyncResolver(async (req, res, next) => {
 exports.getAllProducts = AsyncResolver(async (req, res) => {
 
   // const productCount = await Product.countDocument();
-  const perPage = 10;
+  const perPage = 5;
 
   const apiFeature = new ApiFeatures(Product.find(),req.query)
   .search()
@@ -88,6 +88,59 @@ exports.getProductDetails = AsyncResolver(async (req, res, next) => {
   });
 });
 
+// my review
+
 exports.createProductReview = AsyncResolver(async(req,res,next)=>{
-  
-})
+  const {rating ,comment, productId}  = req.body;
+  const review = {
+    user : req.user._id,
+    name : req.user.name,
+    rating : Number(rating),
+    comment,
+  }
+
+  const product = await Product.findById(productId);
+  const isReview = product.review.find(
+    (rev) =>rev.user.toString() === req.user._id.toString()
+  )
+  if(isReview){
+    product.review.forEach(rev => {
+      if((rev) =>rev.user.toString() === req.user._id.toString()){
+        rev.rating = rating;
+        rev.comment = comment;
+      }
+    });
+  }else{
+    product.review.push(review);
+    product.numsOfReviews = product.review.length
+  }
+  let average = 0;
+  product.review.forEach(element => {
+    average += element
+  });
+
+  product.rating = average / product.review.length;
+  await product.save({validateBeforeSave : false});
+
+  res.status(200).json({
+    success : true
+  })
+});
+
+// get all reviews of a product
+
+exports.getProdctReview = AsyncResolver(async(req,res,next)=>{
+  const product = await Product.findById(req.query.id);
+
+  if(!product){
+    return next(new ErrorHander("Product not found", 404));
+  }
+
+  res.status(200).json({
+    success : true,
+    reviews : product.review
+  })
+
+});
+
+// delete review
