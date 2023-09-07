@@ -1,15 +1,17 @@
 const express = require("express");
 const product = require("./Routes/productRoute.js");
+const user = require("./Routes/userRoute.js");
+const order = require("./Routes/orderRoute.js")
 const app = express();
 const errorHandler = require ("./middleware/error.js");
-const router = require("./Routes/userRoute.js");
 const cookieParser = require("cookie-parser");
 
 app.use(express.json());
 app.use(cookieParser());
 
 app.use("/mern", product);
-app.use("/mern", router)
+app.use("/mern", user)
+app.use("/mern", order);
 
 
 // middleware for error Handling

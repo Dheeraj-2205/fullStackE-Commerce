@@ -10,7 +10,6 @@ const Newidea = require("../utils/apiFeature.js");
 exports.createProduct = AsyncResolver(async (req, res, next) => {
 
   req.body.user = req.user.id;
-  console.log(req.user.id);
   const create = await Product.create(req.body);
 
   res.status(201).json({
@@ -43,6 +42,7 @@ exports.getAllProducts = AsyncResolver(async (req, res) => {
 
 //updateProduct  only for admin
 exports.updateProduct = AsyncResolver(async (req, res, next) => {
+  
   const { id } = req.params;
 
   const product = await Product.findById({ _id: id });

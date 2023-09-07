@@ -66,8 +66,7 @@ const orderSchema = new mongoose.Schema({
         },
     },
     paidAt : {
-        type : Date,
-        required : true
+        type : Date, 
     },
     taxPrice : {
         type : Number,

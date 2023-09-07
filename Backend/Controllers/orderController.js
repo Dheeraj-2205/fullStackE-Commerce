@@ -6,7 +6,7 @@ const AsyncError = require("../middleware/asyncError");
 exports.newOrder = AsyncError(async (req, res, next) => {
   const {
     shippingInfo,
-    orderItem,
+    orderItems,
     paymentInfo,
     paidAt,
     taxPrice,
@@ -16,7 +16,7 @@ exports.newOrder = AsyncError(async (req, res, next) => {
 
   const order = await Order.create({
     shippingInfo,
-    orderItem,
+    orderItems,
     paymentInfo,
     paidAt,
     taxPrice,
@@ -31,3 +31,27 @@ exports.newOrder = AsyncError(async (req, res, next) => {
     order
   })
 });
+
+
+// get Single Order
+
+exports.getSingleOrder = AsyncError(async(req,res,next)=>{
+
+    const {id} = req.params;
+
+    const order = await Order.findById(id).populate(
+        "user", 
+        "name email"
+    );
+
+    if(!order){
+        return next(new ErrorHander("Order Not Found with this id", 404));
+    };
+
+    res.status(200).json({
+        success : true,
+        order
+    })
+})
+
+
