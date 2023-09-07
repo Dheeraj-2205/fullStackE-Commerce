@@ -7,7 +7,6 @@ const Newidea = require("../utils/apiFeature.js");
 
 //Create Product => admin routes
 
-
 exports.createProduct = AsyncResolver(async (req, res, next) => {
 
   req.body.user = req.user.id;
