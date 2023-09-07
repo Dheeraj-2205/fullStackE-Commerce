@@ -153,7 +153,7 @@ exports.deleteProduct = AsyncResolver(async(req,res,next)=>{
   };
 
   const reviews = product.review.filter(
-    (rev) => rev._id.toString() !== rev.query.id.toString()
+    (rev) => rev._id.toString() !== req.query.id.toString()
   )
 
   let avg = 0;
