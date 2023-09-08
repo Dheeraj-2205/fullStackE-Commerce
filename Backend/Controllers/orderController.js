@@ -9,6 +9,7 @@ exports.newOrder = AsyncError(async (req, res, next) => {
     shippingInfo,
     orderItems,
     paymentInfo,
+    status,
     paidAt,
     taxPrice,
     shippingPrice,
@@ -19,6 +20,7 @@ exports.newOrder = AsyncError(async (req, res, next) => {
     shippingInfo,
     orderItems,
     paymentInfo,
+    status,
     paidAt,
     taxPrice,
     shippingPrice,
@@ -70,11 +72,10 @@ exports.myOrders = AsyncError(async(req,res,next)=>{
 
 exports.getAllOrder = AsyncError(async(req,res)=>{
   const order = await Order.find();
-
-  const total = 0;
-
+  let total = 0;
+  
   order.forEach((ele)=>{
-    total += totalPrice;
+    total += ele.totalPrice;
   })
   res.status(200).json({
     success : true,
@@ -88,6 +89,10 @@ exports.getAllOrder = AsyncError(async(req,res)=>{
 
 exports.updateOrder = AsyncError(async(req,res,next)=>{
   const order = await Order.findById(req.params.id);
+
+  if(!order){
+    return next(new ErrorHander("Order is not found", 404));
+  }
 
   if(order.orderStatus === "Delivered"){
     return next(new ErrorHandler("Order is already deliverd", 400));
@@ -103,7 +108,8 @@ exports.updateOrder = AsyncError(async(req,res,next)=>{
   }
   await order.save({validateBeforeSave : false});
   res.status(200).json({
-    success : true
+    success : true,
+    order
   })
 })
 
@@ -119,15 +125,16 @@ async function updateStock (id,quantity){
 // delete order
 
 exports.deleteOrder = AsyncError(async(req,res,next)=>{
-  const order = await Order.findById(id);
+  const order = await Order.findById(req.params.id);
   
   if(!order){
     return next(new ErrorHander("Order is not found", 404));
   }
-  await order.remove();
+  await order.deleteOne();
 
   res.status(200).json({
     success : true,
+    order
 
   })
 })
