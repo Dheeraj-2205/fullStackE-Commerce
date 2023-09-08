@@ -68,7 +68,7 @@ exports.myOrders = AsyncError(async(req,res,next)=>{
 
 })
 
-exports.getAllOrder = AsyncResolver(async(req,res)=>{
+exports.getAllOrder = AsyncError(async(req,res)=>{
   const order = await Order.find();
 
   const total = 0;
@@ -86,7 +86,7 @@ exports.getAllOrder = AsyncResolver(async(req,res)=>{
 // update order status  -- Admin
 // ---p
 
-exports.updateOrder = AsyncResolver(async(req,res,next)=>{
+exports.updateOrder = AsyncError(async(req,res,next)=>{
   const order = await Order.findById(req.params.id);
 
   if(order.orderStatus === "Delivered"){
@@ -114,6 +114,8 @@ async function updateStock (id,quantity){
   product.Stock  -= quantity;
   await product.save({validateBeforeSave : false})
 }
+
+
 
 
 
