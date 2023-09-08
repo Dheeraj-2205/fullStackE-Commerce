@@ -33,7 +33,7 @@ exports.newOrder = AsyncError(async (req, res, next) => {
 });
 
 
-// get Single Order
+// get Single Order --admin
 
 exports.getSingleOrder = AsyncError(async(req,res,next)=>{
 
@@ -54,4 +54,15 @@ exports.getSingleOrder = AsyncError(async(req,res,next)=>{
     })
 })
 
+// get logged in order
 
+exports.myOrders = AsyncError(async(req,res,next)=>{
+
+    const orders = await Order.find({user : req.user._id});
+
+    res.status(200).json({
+        success : true,
+        orders
+    })
+
+})
