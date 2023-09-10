@@ -25,6 +25,17 @@ const Home = () => {
       <div className="container" id="container">
         {/* redux */}
         <Product product = {product}/> 
+        <Product product = {product}/> 
+        <Product product = {product}/> 
+        <Product product = {product}/> 
+
+           
+        <Product product = {product}/> 
+        <Product product = {product}/> 
+        <Product product = {product}/> 
+        <Product product = {product}/> 
+
+
       </div>
     </>
   )
