@@ -24,7 +24,7 @@ exports.createProduct = AsyncResolver(async (req, res, next) => {
 exports.getAllProducts = AsyncResolver(async (req, res) => {
 
   const productCount = await Product.countDocuments();
-  const perPage = 5;
+  const perPage = 8;
 
   const apiFeature = new ApiFeatures(Product.find(),req.query)
   .search()
