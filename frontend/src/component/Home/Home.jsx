@@ -13,36 +13,43 @@ const product = {
 const Home = () => {
   const dispatch = useDispatch();
 
+  const {loading,error,products,productsCount} = useSelector(
+    (state => state.products)
+  )
+
   useEffect(()=>{
     dispatch(fetchProduct())
   },[dispatch])
   return (
     <>
-      <div className='banner'>
-        <p>Welcome To ECommerce</p>
-        <h1>Find Amazing Products</h1>
+      {
+        loading ?  "Loading" : <>
+        <div className='banner'>
+          <p>Welcome To ECommerce</p>
+          <h1>Find Amazing Products</h1>
 
-        <a href="#container">
-          <button>Scroll <CgMouse/></button>
-        </a>
-      </div>
-      <div className="homeHeading">Feature Product</div>
+          <a href="#container">
+            <button>Scroll <CgMouse/></button>
+          </a>
+        </div>
+        <div className="homeHeading">Feature Product</div>
 
-      <div className="container" id="container">
-        {/* redux */}
-        <Product product = {product}/> 
-        <Product product = {product}/> 
-        <Product product = {product}/> 
-        <Product product = {product}/> 
+        <div className="container" id="container">
+          {/* redux */}
+          {
+            products && products.map((ele)=>{
+              return(
+                <>
+                  <Product product={ele}/>
+                </>
+              )
+            })
+          }
 
-           
-        <Product product = {product}/> 
-        <Product product = {product}/> 
-        <Product product = {product}/> 
-        <Product product = {product}/> 
 
-
-      </div>
+        </div>
+      </>
+      }
     </>
   )
 }
