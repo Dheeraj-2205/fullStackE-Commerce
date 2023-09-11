@@ -6,6 +6,10 @@ const app = express();
 const errorHandler = require ("./middleware/error.js");
 const cookieParser = require("cookie-parser");
 
+
+// const cors = require("cors");
+// app.use(cors({ origin: 'http://localhost:3000' }));
+
 app.use(express.json());
 app.use(cookieParser());
 
