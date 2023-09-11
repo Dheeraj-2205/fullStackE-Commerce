@@ -5,6 +5,7 @@ import webFont from "webfontloader";
 import { useEffect } from 'react';
 import Footer from './component/layout/Footer/Footer';
 import Home from "./component/Home/Home.jsx"
+import Loading from './component/loading/Loading';
 
 
 
@@ -23,6 +24,7 @@ function App() {
         <Header/>
         <Routes>
           <Route index element = {<Home/>}/>
+          {/* <Route path="ssd" element = {<Loading/>}/> */}
         </Routes>
         <Footer/>
       </BrowserRouter>

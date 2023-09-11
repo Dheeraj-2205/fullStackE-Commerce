@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
-import {CgMouse} from "react-icons/cg"
+import {CgMouse} from "react-icons/cg";
+import Loading from '../loading/Loading';
 import "./home.css"
 import Product from "./Product.jsx";
 import { fetchProduct } from '../actions/productAction.js';
@@ -23,7 +24,7 @@ const Home = () => {
   return (
     <>
       {
-        loading ?  "Loading" : <>
+        loading ?  <Loading/> : <>
         <div className='banner'>
           <p>Welcome To ECommerce</p>
           <h1>Find Amazing Products</h1>
