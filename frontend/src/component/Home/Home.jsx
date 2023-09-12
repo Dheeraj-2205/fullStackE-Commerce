@@ -6,8 +6,8 @@ import Product from "./Product.jsx";
 import { fetchProduct } from '../actions/productAction.js';
 import {useSelector,useDispatch} from "react-redux"
 import { useAlert } from 'react-alert'
-const Home = () => {
 
+const Home = () => {
   const alert = useAlert();
   const dispatch = useDispatch();
   const { loading,error,products,productsCount } = useSelector(
