@@ -5,22 +5,22 @@ import "./home.css"
 import Product from "./Product.jsx";
 import { fetchProduct } from '../actions/productAction.js';
 import {useSelector,useDispatch} from "react-redux"
-const product = {
-  name : "TSHirt",
-  price : 300,
-  _id : 14,
-  images : [{url : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1NMGzZlhwF5tOpnbvpAUoACBCg3QDbulPdw&usqp=CAU"}]
-}
+import { useAlert } from 'react-alert'
 const Home = () => {
+
+  const alert = useAlert();
   const dispatch = useDispatch();
-
-  const {loading,error,products,productsCount} = useSelector(
-    (state => state.products)
-  )
-
+  const { loading,error,products,productsCount } = useSelector(
+    (state) => state.products
+  );
+  
   useEffect(()=>{
+    if(error){
+      return alert.error(error)
+    }
     dispatch(fetchProduct())
-  },[dispatch])
+    
+  },[dispatch, error])
   return (
     <>
       {
@@ -36,7 +36,6 @@ const Home = () => {
         <div className="homeHeading">Feature Product</div>
 
         <div className="container" id="container">
-          {/* redux */}
           {
             products && products.map((ele)=>{
               return(
@@ -46,7 +45,6 @@ const Home = () => {
               )
             })
           }
-
 
         </div>
       </>

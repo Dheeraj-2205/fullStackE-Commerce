@@ -27,6 +27,7 @@
     "jsonwebtoken": "^9.0.1",
     "mongoose": "^7.4.4",
     "nodemailer": "^6.9.4",
+    "react-alert-template-basic": "^1.0.2",
     "validator": "^13.11.0"
   }
 }

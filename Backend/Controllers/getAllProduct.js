@@ -21,8 +21,8 @@ exports.createProduct = AsyncResolver(async (req, res, next) => {
 });
 // createData
 
-exports.getAllProducts = AsyncResolver(async (req, res) => {
-
+exports.getAllProducts = AsyncResolver(async (req, res,next) => {
+  // return next(new ErrorHander("oops",500))
   const productCount = await Product.countDocuments();
   const perPage = 8;
 
