@@ -8,10 +8,9 @@ import { useParams } from 'react-router-dom';
 const ProductDetails = () => {
     const dispatch = useDispatch();
     const {id} = useParams();
-    const {products,loading,error} =  useSelector((state)=>state.product);
-
+    const {product,loading,error} =  useSelector((state)=>state.product);
+    console.log(product);
     
-    console.log(products);
     useEffect(()=>{
         dispatch(getProductDetails(id));
     }, [dispatch,id])

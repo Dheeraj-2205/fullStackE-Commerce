@@ -13,7 +13,6 @@ const Home = () => {
   const { loading,error,products,productsCount } = useSelector(
     (state) => state.products
   );
-  
   useEffect(()=>{
     if(error){
       return alert.error(error)
