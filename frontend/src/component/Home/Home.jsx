@@ -20,7 +20,7 @@ const Home = () => {
     }
     dispatch(fetchProduct())
     
-  },[dispatch, error])
+  },[dispatch, error,alert])
   return (
     <>
       {

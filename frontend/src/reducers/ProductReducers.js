@@ -15,9 +15,9 @@ export const ProductReducer = (state = {products : []},action) =>{
             
             return{
                 loading : true,
-                product : []
+                 
             };
-        case PRODUCT_DETAILS_SUCCESS:
+        case ALL_PRODUCT_SUCCESS:
             
             return{
                 loading : false,
@@ -44,7 +44,7 @@ export const ProductReducer = (state = {products : []},action) =>{
 
 
 
-export const productDetailsReducer = (state = {products : []},action) =>{
+export const productDetailsReducer = (state = {product : {}},action) =>{
     switch (action.type) {
         case PRODUCT_DETAILS_REQUEST:
             
@@ -52,11 +52,12 @@ export const productDetailsReducer = (state = {products : []},action) =>{
                 loading : true,
                 ...state,
             };
-        case ALL_PRODUCT_SUCCESS:
+
+        case PRODUCT_DETAILS_SUCCESS:
             
             return{
                 loading : false,
-                products : action.payload
+                product : action.payload
             };
     
         case PRODUCT_DETAILS_FAIL:

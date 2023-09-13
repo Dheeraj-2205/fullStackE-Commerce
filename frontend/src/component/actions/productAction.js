@@ -34,20 +34,16 @@ export const fetchProduct = () => async(dispatch) =>{
 }
 
 
-
-
-
 export const getProductDetails = (id) => async(dispatch) =>{
     
     try {
         dispatch({type : PRODUCT_DETAILS_REQUEST});
         
-        const { data }  = await axios.get(`http://192.168.137.1:4000/mern/products/${id}`);
-        console.log(data);
-        
+        const { data }  = await axios.get(`http://192.168.137.1:4000/mern/product/${id}`);
+        // console.log(data.product);
         dispatch({
             type : PRODUCT_DETAILS_SUCCESS,
-            payload : data.payload
+            payload : data.product
         })
     } catch (error) {
        dispatch({
