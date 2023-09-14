@@ -75,6 +75,6 @@ export const productDetailsReducer = (state = {product : {}},action) =>{
             };
 
         default:
-        return state
+        return state;
     }
 };
