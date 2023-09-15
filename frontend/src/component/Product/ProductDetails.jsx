@@ -8,8 +8,8 @@ import { useParams } from 'react-router-dom';
 const ProductDetails = () => {
     const dispatch = useDispatch();
     const {id} = useParams();
-    const {productDetails,loading,error} =  useSelector((state)=>state.productDetails);
-    console.log(productDetails);
+    const {product,loading,error} =  useSelector((state)=>state.productDetails);
+    console.log(product);
     
     useEffect(()=>{
         dispatch(getProductDetails(id));
@@ -20,17 +20,17 @@ const ProductDetails = () => {
             <div>
                 <Carousel>
                     {
-                        // product.image && 
-                        // product.image.map((item,i)=>{
-                        //     return (
-                        //         <img 
-                        //             className='CarouselImage'
-                        //             key = {item.url}
-                        //             src= {item.url}
-                        //             alt={`Slide ${i + 1}`}
-                        //         />
-                        //     )
-                        // })
+                        product.image && 
+                        product.image.map((item,i)=>{
+                            return (
+                                <img 
+                                    className='CarouselImage'
+                                    key = {item.url}
+                                    src= {item.url}
+                                    alt={`Slide ${i + 1}`}
+                                />
+                            )
+                        })
                     }
                 </Carousel>
             </div>
