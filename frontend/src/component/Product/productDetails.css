@@ -1,0 +1,7 @@
+.productDetails{
+    width: 100vw;
+    max-width: 100%;
+    padding: 6vmax;
+    box-sizing: border-box;
+    display: flex
+}
