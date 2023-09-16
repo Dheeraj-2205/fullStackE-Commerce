@@ -35,7 +35,7 @@ const ProductDetails = () => {
                             return (
                                 <img 
                                     className='CarouselImage'
-                                    key = {item.url}
+                                    key = {i}
                                     src= {item.url}
                                     alt={`Slide ${i + 1}`}
                                 />
