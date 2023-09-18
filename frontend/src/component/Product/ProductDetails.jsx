@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails } from "../actions/productAction";
 import { useParams } from "react-router-dom";
 import StarRatingComponent from 'react-star-rating-component';
+import ReviewCard from "./ReviewCard.jsx"
 
 const ProductDetails = () => {
     const dispatch = useDispatch();
@@ -82,8 +83,25 @@ const ProductDetails = () => {
                         Submit Review
                     </button>
                 </div>
-
             </div>
+
+            <h3 className="reviewsHeading">
+                REVIEWS
+            </h3>
+
+            {
+                product.review && product.review[0] ? (
+                    <div className="reviews">
+                        {
+                            product.review && product.review.map((ele)=>{
+                                return(
+                                    <ReviewCard reviews = {ele}/>
+                                )
+                            })
+                        }
+                    </div>
+                ) : <p className="noReviews">No Reviews Yet</p>
+            }
         </>
     );
 };
