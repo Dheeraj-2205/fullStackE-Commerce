@@ -18,8 +18,8 @@ export const fetchProduct = () => async(dispatch) =>{
     try {
         dispatch({type : ALL_PRODUCT_REQUEST});
         
-        const { data }  = await axios.get("http://192.168.137.1:4000/mern/products");
-        // console.log(data);
+        const { data }  = await axios.get("http://192.168.159.1:4000/mern/products");
+        console.log(data);
         
         dispatch({
             type : ALL_PRODUCT_SUCCESS,
@@ -39,7 +39,7 @@ export const getProductDetails = (id) => async(dispatch) =>{
     try {
         dispatch({type : PRODUCT_DETAILS_REQUEST});
         
-        const { data }  = await axios.get(`http://192.168.137.1:4000/mern/product/${id}`);
+        const { data }  = await axios.get(`http://192.168.159.1:4000/mern/product/${id}`);
         // console.log(data.product);
         dispatch({
             type : PRODUCT_DETAILS_SUCCESS,

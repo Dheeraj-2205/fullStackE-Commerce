@@ -4,7 +4,7 @@ import "./productDetails.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails } from "../actions/productAction";
 import { useParams } from "react-router-dom";
-import ReactStars from "react-rating-stars-component";
+import StarRatingComponent from 'react-star-rating-component';
 
 const ProductDetails = () => {
     const dispatch = useDispatch();
@@ -19,41 +19,37 @@ const ProductDetails = () => {
     }, [dispatch, id]);
 
     const options = {
-        edit: false,
-        color: "rgba(20,20,20,0.1)",
-        activeColor: "tomato",
-        size: window.innerWidth < 600 ? 20 : 25,
         value: product.rating,
-        isHalf: true,
+        editing: false
     };
+    console.log(options);
     return (
         <>
             <div className="productDetails">
-                <div className="productImages">
+                <div className="carousel">
                     <Carousel>
                         {
                             product.image &&
-                                product.image.map((item, i) => (
-                                    <img
-                                        className="CarouselImage"
-                                        key={i}
-                                        src={item.url}
-                                        alt={`${i} Slide`}
-                                    />
-                                ))
+                            product.image.map((item, i) => (
+                                <img
+                                    className="CarouselImage"
+                                    key={i}
+                                    src={item.url}
+                                    alt={`${i} Slide`}
+                                />
+                            ))
                         }
                     </Carousel>
                 </div>
 
-                <div className="productDetailsContent">
+                <div className="detailsBlock">
                     <div className="detailsBlock-1">
                         <h2>{product.name}</h2>
                         <p>Product # {product._id}</p>
                     </div>
                     <div className="detailsBlock-2">
-                        <ReactStars {...options} />
+                        <StarRatingComponent {...options} />
                         <span className="detailsBlock-2-span">
-                            {" "}
                             ({product.numOfReviews} Reviews)
                         </span>
                     </div>
@@ -61,8 +57,8 @@ const ProductDetails = () => {
                         <h1>{`₹${product.price}`}</h1>
                         <div className="detailsBlock-3-1">
                             <div className="detailsBlock-3-1-1">
-                                <button >-</button>
-                                <input readOnly type="number" value="1" />
+                                <button>-</button>
+                                <input  readOnly type="number" value={product.Stock} style={{color : "blue"}} />
                                 <button>+</button>
                             </div>
                             <button>
@@ -86,6 +82,7 @@ const ProductDetails = () => {
                         Submit Review
                     </button>
                 </div>
+
             </div>
         </>
     );
