@@ -32,7 +32,7 @@ module.exports = (err,req,res,next) =>{
 
     if(err.name === TokenExpiredError){
         const message = "JsonWebToken is expire";
-        err = new Errorhandler(message,400);
+        err = new ErrorHandler(message,400);
     }
 
     res.status(err.statusCode).json({
