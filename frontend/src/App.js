@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import Footer from './component/layout/Footer/Footer';
 import Home from "./component/Home/Home.jsx"
 import ProductDetails from "./component/Product/ProductDetails.jsx"
-
+import Products from "./component/Product/Product.jsx"
 
 
 function App() {
@@ -24,6 +24,7 @@ function App() {
         <Routes>
           <Route index element = {<Home/>}/>
           <Route path = "/product/:id" element= {<ProductDetails/>}/>
+          <Route path = "/products" element= {<Products/>}/>
         </Routes>
         <Footer/>
       </BrowserRouter>

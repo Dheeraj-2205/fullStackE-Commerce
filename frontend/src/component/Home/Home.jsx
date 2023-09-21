@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import {CgMouse} from "react-icons/cg";
 import Loading from '../loading/Loading';
 import "./home.css"
-import Product from "./Product.jsx";
+import Product from "./ProductCard.jsx";
 import { fetchProduct } from '../actions/productAction.js';
 import {useSelector,useDispatch} from "react-redux"
 import { useAlert } from 'react-alert'
