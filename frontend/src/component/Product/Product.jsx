@@ -10,11 +10,51 @@ const Product = () => {
     const { loading, error, products, productsCount } = useSelector(
         (state) => state.products
     );
-    console.log(products);
+    // console.log(loading);
     useEffect(() => {
         dispatch(fetchProduct());
     }, [dispatch]);
-    return <>{Loading ? <Loading /> : <></>}</>;
+    // return <>
+    //     {
+            
+    //         loading ? <Loading /> : <>
+    //             <h2>Product Heading</h2>
+    //             <div className="products">
+    //                 {
+    //                     products && products.map((ele)=>{
+    //                         return(
+    //                           <>
+    //                             <Product product={ele}/>
+    //                           </>
+    //                         )
+    //                     })
+    //                 }
+    //             </div>
+    //         </>
+    //     }
+    // </>;
+
+    return (
+      <>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          
+          <h2 className="productsHeading">Products</h2>
+
+          <div className="products">
+            {products &&
+              products.map((product) => (
+                <ProductCard key={product._id} product={product} />
+              ))}
+          </div>
+
+          
+        </>
+      )}
+    </>
+    )   
 };
 
 export default Product;

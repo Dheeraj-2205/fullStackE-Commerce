@@ -17,7 +17,7 @@ config({
 // always call after config
 connectDb();
 
-const server = app.listen(process.env.PORT, ()=>{
+const server = app.listen(process.env.PORT,()=>{
     console.log(`Port is listening ${process.env.PORT}`);
 });
 

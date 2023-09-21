@@ -42,5 +42,10 @@ input[type="submit"]{
     background-color: rgb(237, 94, 37);
     cursor: pointer;
     color: white;
-    font: 500 cursive;
+    font: 500 1.1vmax "Roboto";
+    transition: all 0.5s;
+}
+
+input[type="submit"]:hover{
+    background-color: rgb(224, 60, 5);
 }

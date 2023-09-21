@@ -18,7 +18,7 @@ export const fetchProduct = () => async(dispatch) =>{
     try {
         dispatch({type : ALL_PRODUCT_REQUEST});
         
-        const { data }  = await axios.get("http://192.168.159.1:4000/mern/products");
+        const { data }  = await axios.get("http://192.168.137.1:4000/mern/products");
         console.log(data);
         
         dispatch({
@@ -39,8 +39,8 @@ export const getProductDetails = (id) => async(dispatch) =>{
     try {
         dispatch({type : PRODUCT_DETAILS_REQUEST});
         
-        const { data }  = await axios.get(`http://192.168.159.1:4000/mern/product/${id}`);
-        // console.log(data.product);
+        const { data }  = await axios.get(`http://192.168.137.1:4000/mern/product/${id}`);
+        console.log(data.product);
         dispatch({
             type : PRODUCT_DETAILS_SUCCESS,
             payload : data.product
@@ -59,3 +59,5 @@ export const clearError = () => async(dispatch) =>{
     dispatch({type : CLEAR_ERROR})
 }
 // // "proxy": "http://192.168.137.1:4000"
+
+// ,"proxy": "http://192.168.159.1:4000"
