@@ -1,5 +1,4 @@
 import axios from  "axios";
-import { useParams } from "react-router-dom";
 import {
     ALL_PRODUCT_FAIL,
     ALL_PRODUCT_SUCCESS,
@@ -19,12 +18,22 @@ export const fetchProduct = (q) => async(dispatch) =>{
     try {
         dispatch({type : ALL_PRODUCT_REQUEST});
         
-        const { data }  = await axios.get(`http://localhost:4000/mern/products?q=${q}`);
+        // const { data }  = await axios.get(`http://localhost:4000/mern/products?q=${q}`);
+        if(q == undefined){
+            const { data }  = await axios.get(`http://localhost:4000/mern/products`);
+            console.log(data);
+            dispatch({
+                type : ALL_PRODUCT_SUCCESS,
+                payload : data
+            })
+        }else{
+            const { data }  = await axios.get(`http://localhost:4000/mern/products?q=${q}`);
+            dispatch({
+                type : ALL_PRODUCT_SUCCESS,
+                payload : data
+            })
+        }
         
-        dispatch({
-            type : ALL_PRODUCT_SUCCESS,
-            payload : data
-        })
     } catch (error) {
        dispatch({
         type:ALL_PRODUCT_FAIL,

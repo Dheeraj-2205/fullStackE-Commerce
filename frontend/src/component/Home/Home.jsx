@@ -10,7 +10,7 @@ import { useAlert } from 'react-alert'
 const Home = () => {
   const alert = useAlert();
   const dispatch = useDispatch();
-  const { loading,error,products,productsCount } = useSelector(
+  const { loading,error,products } = useSelector(
     (state) => state.products
   );
   useEffect(()=>{
@@ -34,9 +34,9 @@ const Home = () => {
         </div>
         <div className="homeHeading">Feature Product</div>
 
-        <div className="container" id="container">
+        <div className="container" id="container" >
           {
-            products && products.map((ele)=>{
+            products && products.map((ele,i)=>{
               return(
                 <>
                   <Product product={ele}/>
