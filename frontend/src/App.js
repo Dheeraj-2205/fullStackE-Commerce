@@ -25,6 +25,7 @@ function App() {
           <Route index element = {<Home/>}/>
           <Route path = "/product/:id" element= {<ProductDetails/>}/>
           <Route path = "/products" element= {<Products/>}/>
+          <Route path = "/products/:q" element= {<Products/>}/>
           <Route path = "/search" element= {<Search/>}/>
         </Routes>
         <Footer/>

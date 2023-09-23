@@ -1,5 +1,5 @@
 import axios from  "axios";
-
+import { useParams } from "react-router-dom";
 import {
     ALL_PRODUCT_FAIL,
     ALL_PRODUCT_SUCCESS,
@@ -13,13 +13,13 @@ import {
     CLEAR_ERROR
 } from "../../constants/productConstants.js"
 
-export const fetchProduct = () => async(dispatch) =>{
+export const fetchProduct = (q) => async(dispatch) =>{
+    
     
     try {
         dispatch({type : ALL_PRODUCT_REQUEST});
         
-        const { data }  = await axios.get("http://192.168.137.1:4000/mern/products");
-        console.log(data);
+        const { data }  = await axios.get(`http://localhost:4000/mern/products?q=${q}`);
         
         dispatch({
             type : ALL_PRODUCT_SUCCESS,
@@ -39,8 +39,8 @@ export const getProductDetails = (id) => async(dispatch) =>{
     try {
         dispatch({type : PRODUCT_DETAILS_REQUEST});
         
-        const { data }  = await axios.get(`http://192.168.137.1:4000/mern/product/${id}`);
-        console.log(data.product);
+        const { data }  = await axios.get(`http://localhost:4000/mern/product/${id}`);
+        
         dispatch({
             type : PRODUCT_DETAILS_SUCCESS,
             payload : data.product
@@ -58,6 +58,6 @@ export const getProductDetails = (id) => async(dispatch) =>{
 export const clearError = () => async(dispatch) =>{
     dispatch({type : CLEAR_ERROR})
 }
-// // "proxy": "http://192.168.137.1:4000"
 
-// ,"proxy": "http://192.168.159.1:4000"
+
+
