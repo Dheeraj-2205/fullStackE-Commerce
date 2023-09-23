@@ -19,7 +19,7 @@ export const fetchProduct = (q) => async(dispatch) =>{
         dispatch({type : ALL_PRODUCT_REQUEST});
         
         // const { data }  = await axios.get(`http://localhost:4000/mern/products?q=${q}`);
-        if(q == undefined){
+        if(q === undefined){
             const { data }  = await axios.get(`http://localhost:4000/mern/products`);
             console.log(data);
             dispatch({
