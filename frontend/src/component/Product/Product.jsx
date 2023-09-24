@@ -14,18 +14,19 @@ const Product = () => {
     const { loading, error, products, productsCount, perPage } = useSelector(
         (state) => state.products
     );//, resultPerPage
-      // console.log(resultPerPage);
+      
     const setCurrentPageNo = (e) =>{
       setCurrentPage(e);
     }
     
     useEffect(() => {
-        dispatch(fetchProduct(q));
-    }, [dispatch,q]);
-
+        dispatch(fetchProduct(q,currentPage));
+    }, [dispatch,q,currentPage]);
+    console.log(productsCount);
     return (
       <>
-      {loading ? (
+      {
+      loading ? (
         <Loading />
       ) : (
         <>
@@ -43,15 +44,16 @@ const Product = () => {
             <Pagination
               activePage = {currentPage}
               itemsCountPerPage = {perPage}
-              totalItemsCount = {productsCount}
+              totalItemsCount = {productsCount === undefined ? 1 : productsCount}
               onChange = {setCurrentPageNo}
               nextPageText = "Next"
               prevPageText = "Prev"
               firstPageText = "1st"
               lastPageText = "Last"
-              itemsClass ="page-item"
+              itemClass ="page-item"
+              itemClassLast = "last-class"
               linkClass = "page-link"
-              activeClass = "pageItemActive"
+              activeClass = "hiii"
               activeLinkClass = "pageLinkActive"
             
             />

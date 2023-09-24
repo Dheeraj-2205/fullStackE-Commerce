@@ -28,8 +28,7 @@
     padding: 0;
 }
 
-.pagination > li {
-    background-color: white;
+.page-item {
     list-style: none;
     border: 1px solid rgb(0, 0, 0, 0.77);
     border-right: 0;
@@ -38,22 +37,24 @@
     cursor: pointer;
 }
 
-.pagination > .page-link,li:hover{
-    background-color: rgba(0, 0, 0, 0.35);
+.page-item:hover{
+    background-color: rgba(80, 80, 80,0.35);
+    /* color: white; */
+} 
+.page-link:hover {
     color: white;
 }
-/* .page-link:hover {
-    color: white;
-} */
-.pagination > li:last-child{
-    border-right: 1px solid rgb(0, 0, 0, 0.77);
+.last-class{
+    border-right: 1px solid rgba(9, 9, 9, 0.77);
 }
-.pagination > li > a{
-    
+.page-link{  
     text-decoration: none;
-    color: rgb(0, 0, 0, 0.37);
+    color: rgb(0, 0, 0, 0.87);
     font-family: 'Roboto';
 }
-.pageItemActive  {
-    background-color: tomato;
+.hiii{
+    background-color: tomato; 
+}
+.pageLinkActive{
+    color: white;
 }
