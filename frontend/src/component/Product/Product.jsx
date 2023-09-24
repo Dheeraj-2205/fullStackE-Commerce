@@ -6,11 +6,12 @@ import ProductCard from "../Home/ProductCard";
 import Loading from "../loading/Loading";
 import { useParams } from "react-router-dom";
 import { text } from "body-parser";
+import Pagination from "react-js-pagination"
 const Product = () => {
     const dispatch = useDispatch();
     const [currentPage,setCurrentPage] = useState(1);
     const {q} = useParams();
-    const { loading, error, products, productsCount } = useSelector(
+    const { loading, error, products, productsCount, perPage } = useSelector(
         (state) => state.products
     );//, resultPerPage
       // console.log(resultPerPage);
@@ -39,9 +40,9 @@ const Product = () => {
           </div>
 
           <div className="paginationBox">
-            {/* <Pagination>
+            <Pagination
               activePage = {currentPage}
-              itemsCountPerPage = {resultPerPage}
+              itemsCountPerPage = {perPage}
               totalItemsCount = {productsCount}
               onChange = {setCurrentPageNo}
               nextPageText = "Next"
@@ -52,7 +53,8 @@ const Product = () => {
               linkClass = "page-link"
               activeClass = "pageItemActive"
               activeLinkClass = "pageLinkActive"
-            </Pagination> */}
+            
+            />
           </div>
 
           
