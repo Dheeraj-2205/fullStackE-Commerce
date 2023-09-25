@@ -6,12 +6,25 @@ import ProductCard from "../Home/ProductCard";
 import Loading from "../loading/Loading";
 import { useParams } from "react-router-dom";
 import { text } from "body-parser";
-import Pagination from "react-js-pagination"
+import Pagination from "react-js-pagination";
+import Slider from "@mui/material/Slider"
+import {
+  Headline1,
+  Headline2,
+  Headline3,
+  Headline4,
+  Headline5,
+  Headline6,
+  Overline,
+  Subtitle1,
+  Subtitle2,
+} from '@material/react-typography'
 const Product = () => {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
+  const [price, setPrice] = useState([499, 90000]);
   const { q } = useParams();
-  const { loading, error, products, productsCount, perPage,filteredProductsCount } = useSelector(
+  const { loading, error, products, productsCount, perPage, filteredProductsCount } = useSelector(
     (state) => state.products
   );//, resultPerPage
 
@@ -19,11 +32,18 @@ const Product = () => {
     setCurrentPage(e);
   }
 
+  const priceHandler = (e, newPrice) => {
+    setPrice(newPrice);
+  }
   useEffect(() => {
-    dispatch(fetchProduct(q, currentPage));
-  }, [dispatch, q, currentPage]);
+    dispatch(fetchProduct(q, currentPage, price));
+  }, [dispatch, q, currentPage, price]);
+
+
   console.log("productsCount =>" + productsCount);
   console.log("perPage =>" + perPage);
+
+
   return (
     <>
       {
@@ -41,8 +61,24 @@ const Product = () => {
                 ))}
             </div>
 
+            <div className="filterBox">
+              <Headline1>
+                price range
+              </Headline1>
+              <Slider
+
+                value={price}
+                onChange={priceHandler}
+                valueLabelDisplay="auto"
+                aria-labelledby="range-slider"
+                min={499}
+                max={90000}
+              />
+            </div>
+
+
             {
-              products.length >=  perPage  && (
+              perPage < filteredProductsCount && (
                 <div className="paginationBox">
                   <Pagination
                     activePage={currentPage}

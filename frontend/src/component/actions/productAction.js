@@ -12,12 +12,12 @@ import {
     CLEAR_ERROR
 } from "../../constants/productConstants.js"
 
-export const fetchProduct = (q = "", currentPage = 1) => async (dispatch) => {
+export const fetchProduct = (q = "", currentPage = 1 ,price = [499 , 90000]) => async (dispatch) => {
 
 
     try {
         dispatch({ type: ALL_PRODUCT_REQUEST });
-        const { data } = await axios.get(`http://localhost:4000/mern/products?q=${q}&page=${currentPage}`);
+        const { data } = await axios.get(`http://localhost:4000/mern/products?q=${q}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}`);
         console.log(data);
         dispatch({
             type: ALL_PRODUCT_SUCCESS,
