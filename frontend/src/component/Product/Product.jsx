@@ -9,7 +9,8 @@ import { text } from "body-parser";
 import Pagination from "react-js-pagination";
 import Slider from "@mui/material/Slider"
 import {
-  Headline3
+  Headline3,
+  Headline4
 } from '@material/react-typography'
 
 
@@ -98,28 +99,37 @@ const Product = () => {
                   })
                 }
               </ul>
+
+              <fieldset>
+                <Headline4>
+                  
+                </Headline4>
+              </fieldset>
             </div>
 
 
             
-              
-                <div className="paginationBox">
-                  <Pagination
-                    activePage={currentPage}
-                    itemsCountPerPage={perPage}
-                    totalItemsCount={productsCount}
-                    onChange={setCurrentPageNo}
-                    nextPageText="Next"
-                    prevPageText="Prev"
-                    firstPageText="1st"
-                    lastPageText="Last"
-                    itemClass="page-item"
-                    itemClassLast="last-class"
-                    linkClass="page-link"
-                    activeClass="hiii"
-                    activeLinkClass="pageLinkActive"
-                  />
-                </div>
+            {
+              perPage <= filteredProductsCount && 
+              <div className="paginationBox">
+                <Pagination
+                  activePage={currentPage}
+                  itemsCountPerPage={perPage}
+                  totalItemsCount={productsCount}
+                  onChange={setCurrentPageNo}
+                  nextPageText="Next"
+                  prevPageText="Prev"
+                  firstPageText="1st"
+                  lastPageText="Last"
+                  itemClass="page-item"
+                  itemClassLast="last-class"
+                  linkClass="page-link"
+                  activeClass="hiii"
+                  activeLinkClass="pageLinkActive"
+                />
+              </div>
+            }  
+                
               
             
 
