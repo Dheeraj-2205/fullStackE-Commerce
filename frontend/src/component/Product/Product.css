@@ -64,3 +64,7 @@
     top: 10vmax;
     left: 4vmax;
 }
+.headline{
+    font-family: "Roboto";
+    color: rgba(0, 0, 0, 0.508);
+}

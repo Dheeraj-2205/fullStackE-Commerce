@@ -9,15 +9,7 @@ import { text } from "body-parser";
 import Pagination from "react-js-pagination";
 import Slider from "@mui/material/Slider"
 import {
-  Headline1,
-  Headline2,
-  Headline3,
-  Headline4,
-  Headline5,
-  Headline6,
-  Overline,
-  Subtitle1,
-  Subtitle2,
+  Headline3
 } from '@material/react-typography'
 const Product = () => {
   const dispatch = useDispatch();
@@ -62,9 +54,9 @@ const Product = () => {
             </div>
 
             <div className="filterBox">
-              <Headline1>
-                price range
-              </Headline1>
+              <Headline3 className="headline">
+                Price range
+              </Headline3>
               <Slider
 
                 value={price}
@@ -77,8 +69,8 @@ const Product = () => {
             </div>
 
 
-            {
-              perPage < filteredProductsCount && (
+            
+              
                 <div className="paginationBox">
                   <Pagination
                     activePage={currentPage}
@@ -96,8 +88,8 @@ const Product = () => {
                     activeLinkClass="pageLinkActive"
                   />
                 </div>
-              )
-            }
+              
+            
 
 
           </>

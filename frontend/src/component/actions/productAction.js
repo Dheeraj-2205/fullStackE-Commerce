@@ -16,6 +16,7 @@ export const fetchProduct = (q = "", currentPage = 1 ,price = [499 , 90000]) => 
 
 
     try {
+
         dispatch({ type: ALL_PRODUCT_REQUEST });
         const { data } = await axios.get(`http://localhost:4000/mern/products?q=${q}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}`);
         console.log(data);
@@ -23,7 +24,6 @@ export const fetchProduct = (q = "", currentPage = 1 ,price = [499 , 90000]) => 
             type: ALL_PRODUCT_SUCCESS,
             payload: data
         })
-
 
     } catch (error) {
         dispatch({
