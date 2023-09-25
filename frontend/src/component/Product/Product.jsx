@@ -5,13 +5,12 @@ import { clearError, fetchProduct } from "../actions/productAction";
 import ProductCard from "../Home/ProductCard";
 import Loading from "../loading/Loading";
 import { useParams } from "react-router-dom";
-import { text } from "body-parser";
 import Pagination from "react-js-pagination";
 import Slider from "@mui/material/Slider"
 import { Typography } from "@mui/material";
+import { useAlert } from "react-alert";
 import {
-  Headline3,
-  Headline4
+  Headline3
 } from '@material/react-typography'
 
 
@@ -42,9 +41,15 @@ const Product = () => {
   const priceHandler = (e, newPrice) => {
     setPrice(newPrice);
   }
+
+  const alert = useAlert();
   useEffect(() => {
+    if(error){
+      alert.error(error);
+      dispatch(clearError());
+    }
     dispatch(fetchProduct(q, currentPage, price, category,rating));
-  }, [dispatch, q, currentPage, price, category,rating]);
+  }, [dispatch, q, currentPage, price, category,rating,alert,error]);
 
 
 
