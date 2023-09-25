@@ -12,13 +12,13 @@ import {
     CLEAR_ERROR
 } from "../../constants/productConstants.js"
 
-export const fetchProduct = (q = "", currentPage = 2) => async (dispatch) => {
+export const fetchProduct = (q = "", currentPage = 1) => async (dispatch) => {
 
 
     try {
         dispatch({ type: ALL_PRODUCT_REQUEST });
         const { data } = await axios.get(`http://localhost:4000/mern/products?q=${q}&page=${currentPage}`);
-        // console.log(data);
+        console.log(data);
         dispatch({
             type: ALL_PRODUCT_SUCCESS,
             payload: data

@@ -31,12 +31,14 @@ exports.getAllProducts = AsyncResolver(async (req, res,next) => {
   .filter()
   .pagination(perPage);
   const products = await apiFeature.query
+  let filteredProductsCount = products.length;
 
   res.status(200).json({
     success: true,
     products,
     productCount,
-    perPage
+    perPage,
+    filteredProductsCount
   });
 });
 
