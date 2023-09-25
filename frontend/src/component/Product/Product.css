@@ -85,8 +85,9 @@
     font-family: "Roboto";
     color: rgba(0, 0, 0, 0.508);
 }
-
-
+.rating{
+    border: 1px solid black;
+}
 @media screen and (max-width : 600px){
     .filterBox{
         width: 30vmax;
@@ -95,5 +96,8 @@
     }
     .page-link{
         font-size: 1.3vmax;
+    }
+    .category-link{
+        font: 500 1.7vmax "Roboto";
     }
 }

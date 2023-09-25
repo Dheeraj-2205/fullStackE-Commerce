@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import { text } from "body-parser";
 import Pagination from "react-js-pagination";
 import Slider from "@mui/material/Slider"
+import { Typography } from "@mui/material";
 import {
   Headline3,
   Headline4
@@ -27,6 +28,7 @@ const Product = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([499, 90000]);
   const [category,setCategory] = useState("");
+  const [rating,setRating] = useState(0);
   
   const { q } = useParams();
   const { loading, error, products, productsCount, perPage, filteredProductsCount } = useSelector(
@@ -41,8 +43,8 @@ const Product = () => {
     setPrice(newPrice);
   }
   useEffect(() => {
-    dispatch(fetchProduct(q, currentPage, price, category));
-  }, [dispatch, q, currentPage, price, category]);
+    dispatch(fetchProduct(q, currentPage, price, category,rating));
+  }, [dispatch, q, currentPage, price, category,rating]);
 
 
 
@@ -101,9 +103,17 @@ const Product = () => {
               </ul>
 
               <fieldset>
-                <Headline4>
-                  
-                </Headline4>
+                <Typography component="legend"> super</Typography>
+                <Slider 
+                  value = {rating}
+                  onChange={(e,newRating)=>{
+                    setRating(newRating)
+                  }}
+                  aria-labelledby="continuous-slider"
+                  valueLabelDisplay="auto"
+                  min={0}
+                  max={5}
+                />
               </fieldset>
             </div>
 
