@@ -11,10 +11,22 @@ import Slider from "@mui/material/Slider"
 import {
   Headline3
 } from '@material/react-typography'
+
+
+const categories = [
+  "Electronics",
+  "women"
+];
+
+
+
+
 const Product = () => {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([499, 90000]);
+  const [category,setCategory] = useState("");
+  
   const { q } = useParams();
   const { loading, error, products, productsCount, perPage, filteredProductsCount } = useSelector(
     (state) => state.products
@@ -28,12 +40,10 @@ const Product = () => {
     setPrice(newPrice);
   }
   useEffect(() => {
-    dispatch(fetchProduct(q, currentPage, price));
-  }, [dispatch, q, currentPage, price]);
+    dispatch(fetchProduct(q, currentPage, price, category));
+  }, [dispatch, q, currentPage, price, category]);
 
 
-  console.log("productsCount =>" + productsCount);
-  console.log("perPage =>" + perPage);
 
 
   return (
@@ -58,7 +68,7 @@ const Product = () => {
                 Price range
               </Headline3>
               <Slider
-
+                getAriaLabel={() => 'Minimum distance shift'}
                 value={price}
                 onChange={priceHandler}
                 valueLabelDisplay="auto"
@@ -66,6 +76,28 @@ const Product = () => {
                 min={499}
                 max={90000}
               />
+
+              <Headline3 className="headline">
+                Categories
+              </Headline3>
+              <ul className="categoryBox">
+                {
+                  categories.map((ele,i)=>{
+                    return (
+                      <>
+                        <li 
+                          className="category-link"
+                          key = {i}
+                          onClick={()=>setCategory(ele)}
+                        >
+                          {ele}
+                          
+                        </li>
+                      </>
+                    )
+                  })
+                }
+              </ul>
             </div>
 
 

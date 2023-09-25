@@ -198,16 +198,22 @@
 }
 
 .noReviews {
-  font: 400 1.3vmax "Gill Sans";
+  font: 400 1.3vmax "Roboto";
   text-align: center;
-  color: rgba(0, 0, 0, 0.548);
+  color: rgba(0, 0, 0, 0.648);
 }
 @media screen and (max-width: 600px) {
   .ProductDetails {
     flex-direction: column;
     height: unset;
+    justify-content: center;
   }
 
+  .detailsBlock{
+    margin-top: 120%;
+    width: 100%;
+    
+  }
   .ProductDetails>div:last-child {
     align-items: center;
   }
@@ -229,16 +235,19 @@
   .detailsBlock-2>span {
     font-size: 1.5vmax;
   }
-
+  .detailsBlock-3{
+    text-align: center;
+  }
   .detailsBlock-3>h1 {
     font: 700 3vmax "Franklin Gothic Medium";
     text-align: center;
   }
 
+  
   .detailsBlock-3-1 {
     flex-direction: column;
   }
-
+  
   .detailsBlock-3-1-1 {
     padding: 2vmax 0;
   }
@@ -288,5 +297,11 @@
 
   .reviewCardComment {
     font: 300 5vw cursive;
+  }
+  #carousel{
+    position: absolute;
+    margin: auto;
+    top: 7%;
+    left: 1%;
   }
 }

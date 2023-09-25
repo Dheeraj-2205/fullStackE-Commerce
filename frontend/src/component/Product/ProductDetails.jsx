@@ -34,7 +34,7 @@ const ProductDetails = () => {
                 loading ? <Loading /> :
                     <>
                         <div className="productDetails">
-                            <div className="carousel">
+                            <div id="carousel">
                                 <Carousel>
                                     {
                                         product.image &&
