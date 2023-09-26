@@ -1,0 +1,34 @@
+.loginSignupContainer{
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #5b5656;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.loginSignUpBox{
+    background-color: white;
+    width: 25vw;
+    height: 70vh;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.login_signup_toggle{
+    display: flex;
+    height: 3vmax;
+}
+.login_signup_toggle > p{
+    color: rgba(0, 0, 0, 0.12);
+    font: 300 1.4vmax "Roboto";
+    transition: all 0.5s;
+    cursor: pointer;
+    display:grid;
+    place-items: center;
+    width: 100%;
+}

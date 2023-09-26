@@ -23,6 +23,7 @@ const categories = [
 
 
 const Product = () => {
+
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([499, 90000]);
@@ -145,10 +146,7 @@ const Product = () => {
               </div>
             }  
                 
-              
             
-
-
           </>
         )}
     </>

@@ -1,6 +1,8 @@
 import React from "react";
 import { ReactNavbar } from "overlay-navbar";
-
+import { FaBeer } from 'react-icons/fa';
+import { Link } from "react-router-dom";
+console.log(FaBeer);
 const options = {
   burgerColorHover: "#eb4034",
   // logo,
@@ -16,6 +18,8 @@ const options = {
   link2Url: "/products",
   link3Url: "/contact",
   link4Url: "/about",
+  SearchIconElement : <FaBeer/>,
+  searchIconColor : "rgba(35, 35, 35,0.8)",
   link1Size: "1.3vmax",
   link1Color: "rgba(35, 35, 35,0.8)",
   nav1justifyContent: "flex-end",
@@ -33,9 +37,19 @@ const options = {
   cartIconColorHover: "#eb4034",
   cartIconMargin: "1vmax",
 };
-
+// 
 const Header = () => {
-  return <ReactNavbar {...options} />;
+  return (
+    <>
+    <ReactNavbar {...options} />
+      <div>
+        <div>Home</div>
+        <div>Products</div>
+        <div>Contacts</div>
+        <Link to = "/login">Login</Link>
+      </div>
+    </>
+  )
 };
 
 export default Header;
