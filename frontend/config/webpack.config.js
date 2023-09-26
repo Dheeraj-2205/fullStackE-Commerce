@@ -303,7 +303,11 @@ module.exports = function (webpackEnv) {
         buffer: require.resolve("buffer/"),
         assert: require.resolve("assert/"),
         util: require.resolve("util/"),
-        fs: false
+        fs: false,
+        http: require.resolve("stream-http"),
+        url: require.resolve("url/"),
+        crypto: require.resolve("crypto-browserify"),
+        net : false
       },
       // This allows you to set a fallback for where webpack should look for modules.
       // We placed these paths second because we want `node_modules` to "win"
@@ -333,6 +337,7 @@ module.exports = function (webpackEnv) {
         ...(modules.webpackAliases || {}),
       },
       plugins: [
+        // new webpack.NoEmitOnErrorsPlugin(),
         // Prevents users from importing files from outside of src/ (or node_modules/).
         // This often causes confusion because we only process files within src/ with babel.
         // To fix this, we prevent you from importing files out of src/ -- if you'd like to,
