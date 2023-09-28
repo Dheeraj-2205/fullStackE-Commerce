@@ -39,7 +39,6 @@ const LoginSignup = () => {
         }else{
             setUser({ ...user , [e.target.name] : e.target.value})
         }
-        console.log("object");
     }
 
     const switchTabs = (e, tab) =>{
@@ -132,9 +131,21 @@ const LoginSignup = () => {
                     </div>
 
                     <div className="signUpPassword">
+                        <MailOutlineIcon/>
+
+                        <input type="email"
+                            placeholder='Enter Your Email'
+                            required
+                            name = "password"
+                            value = {password}
+                            onChange={registerDataChange}
+                        />
+                    </div>
+
+                    <div className="signUpPassword">
                         <LockOpenIcon/>
 
-                        <input type="text"
+                        <input type="password"
                             placeholder='Enter Your Password'
                             required
                             name = "password"
@@ -142,6 +153,8 @@ const LoginSignup = () => {
                             onChange={registerDataChange}
                         />
                     </div>
+
+                    
 
                     <div id="registerImage">
                         <img src={avatarPreview} alt="Avatar Preview" />
