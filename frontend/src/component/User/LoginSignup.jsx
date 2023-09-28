@@ -1,11 +1,16 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import "./loginSignup.css";
 import { Link } from 'react-router-dom';
 import MailOutlineIcon from "@material-ui/icons/MailOutline"
 import LockOpenIcon from "@material-ui/icons/LockOpen"
 import { BiFace } from 'react-icons/bi';
-
+import { useDispatch, useSelector } from "react-redux";
+import { clearError, login } from '../actions/userAction.js';
+import {useAlert} from "react-alert"
 const LoginSignup = () => {
+    const dispatch = useDispatch();
+    const alert = useAlert();
+    const {error,loading} = useSelector( state => state.user );
 
     const registerTab =useRef(null);
     const loginTab = useRef(null);
@@ -41,6 +46,13 @@ const LoginSignup = () => {
         }
     }
 
+    useEffect(()=>{
+        if(error){
+            alert.error(error)
+            dispatch(clearError());
+        }
+    },[dispatch,error,alert])
+
     const switchTabs = (e, tab) =>{
         if(tab === "login"){
             switchTab.current.classList.add("shiftToNeutral")
@@ -60,8 +72,9 @@ const LoginSignup = () => {
         }
     }
 
-    const loginSubmit = () =>{
-        console.log("object");
+    const loginSubmit = (e) =>{
+        e.preventDefault();
+        dispatch(login(loginEmail,loginPassword));
     }
 
     const registerSubmit = (e) =>{
