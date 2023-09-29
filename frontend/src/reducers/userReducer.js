@@ -1,42 +1,39 @@
-
 import {
-    LOGIN_REQUEST,
-    LOGIN_SUCCESS,
-    LOGIN_FAIL
-} from "../constants/userConstants.js"
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+} from "../constants/userConstants.js";
 
-export const productReducer = (state = {product : []},action) =>{
-    switch (action.type) {
-        case LOGIN_REQUEST:
-            return {
-                loading: true,
-                isAuthenticated: false
-            }
-            
-            
-        case LOGIN_SUCCESS:
-            return {
-                ...state,
-                loading : false,
-                isAuthenticated : true,
-                user : action.payload
-            }
+export const userReducer = (state = { user: {} }, action) => {
+  switch (action.type) {
+    case LOGIN_REQUEST:
+      return {
+        loading: true,
+        isAuthenticated: false,
+      };
 
-        case LOGIN_FAIL:
-            return {
-                ...state,
-                loading: false,
-                isAuthenticated: false,
-                user : null,
-                error : action.payload
-            }
-        case CLEAR_ERROR :
-            return {
-                ...state,
-                error : null
-            }
-        default :
-            return state
-        
-    }
-}
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        isAuthenticated: true,
+        user: action.payload
+      };
+
+    case LOGIN_FAIL:
+      return {
+        ...state,
+        loading: false,
+        isAuthenticated: false,
+        user: null,
+        error: action.payload,
+      };
+    case CLEAR_ERROR:
+      return {
+        ...state,
+        error: null,
+      };
+    default:
+      return state;
+  }
+};

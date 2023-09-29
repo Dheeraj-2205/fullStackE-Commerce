@@ -5,12 +5,14 @@ import MailOutlineIcon from "@material-ui/icons/MailOutline"
 import LockOpenIcon from "@material-ui/icons/LockOpen"
 import { BiFace } from 'react-icons/bi';
 import { useDispatch, useSelector } from "react-redux";
-import { clearError, login } from '../actions/userAction.js';
-import {useAlert} from "react-alert"
+import { clearError, login } from "../actions/userAction";
+import { useAlert } from "react-alert"
+
+
 const LoginSignup = () => {
     const dispatch = useDispatch();
     const alert = useAlert();
-    const {error,loading} = useSelector( state => state.user );
+    // const { error,loading } = useSelector(state => state.user);
 
     const registerTab =useRef(null);
     const loginTab = useRef(null);
@@ -47,11 +49,11 @@ const LoginSignup = () => {
     }
 
     useEffect(()=>{
-        if(error){
-            alert.error(error)
-            dispatch(clearError());
-        }
-    },[dispatch,error,alert])
+        // if(error){
+        //     alert.error(error)
+        //     dispatch(clearError());
+        // }
+    },[dispatch,alert])
 
     const switchTabs = (e, tab) =>{
         if(tab === "login"){
