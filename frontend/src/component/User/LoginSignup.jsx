@@ -151,8 +151,8 @@ const LoginSignup = () => {
                         <input type="email"
                             placeholder='Enter Your Email'
                             required
-                            name = "password"
-                            value = {password}
+                            name = "email"
+                            value = {email}
                             onChange={registerDataChange}
                         />
                     </div>
