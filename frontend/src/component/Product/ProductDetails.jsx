@@ -23,7 +23,6 @@ const ProductDetails = () => {
         }
         dispatch(getProductDetails(id));
     }, [dispatch, id, error,alert]);
-
     const options = {
         value: product.rating,
         editing: false

@@ -62,7 +62,6 @@ const Product = () => {
           <Loading />
         ) : (
           <>
-
             <h2 className="productsHeading">Products</h2>
 
             <div className="products">
@@ -145,8 +144,7 @@ const Product = () => {
                 />
               </div>
             }  
-                
-            
+                        
           </>
         )}
     </>

@@ -15,7 +15,6 @@ const Search = () => {
         }
     }
 
-
   return (
     <>
         <form onSubmit={searchSubmit} className='searchBox'>
@@ -28,8 +27,6 @@ const Search = () => {
                 className='inputTag'
                 value="Submit"
             />
-
-
         </form>
     </>
   )
