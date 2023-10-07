@@ -28,6 +28,7 @@ export const userReducer = (state = { user: {} }, action) => {
         isAuthenticated: true,
         user: action.payload
       };
+
     case REGISTER_USER_FAIL: 
     case LOGIN_FAIL:
       return {
@@ -37,6 +38,7 @@ export const userReducer = (state = { user: {} }, action) => {
         user: null,
         error: action.payload,
       };
+      
     case CLEAR_ERROR:
       return {
         ...state,

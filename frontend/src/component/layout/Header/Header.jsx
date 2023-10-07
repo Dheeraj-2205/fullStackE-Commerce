@@ -2,7 +2,6 @@ import React from "react";
 import { ReactNavbar } from "overlay-navbar";
 import { FaBeer } from 'react-icons/fa';
 import { Link } from "react-router-dom";
-console.log(FaBeer);
 const options = {
   burgerColorHover: "#eb4034",
   // logo,
