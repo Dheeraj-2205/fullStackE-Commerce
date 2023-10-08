@@ -20,7 +20,7 @@ connectDb();
 cloudinary.config({
     cloud_name : process.env.CLOUDINARY_NAME,
     api_key : process.env.API_KEY,
-    secret_key : process.env.SECRET_KEY,
+    api_secret : process.env.SECRET_KEY,
 })
 
 const server = app.listen(process.env.PORT,()=>{

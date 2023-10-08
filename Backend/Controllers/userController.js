@@ -6,17 +6,19 @@ const ErrorHandler = require("../utils/errorHandling.js");
 const sendToken = require("../utils/jwtToken.js");
 const sendEmail = require("../utils/sendEmail.js");
 const crypto = require('crypto');
-const asyncError = require("../middleware/asyncError.js");
 const cloudinary = require('cloudinary');
 
 // register
 
 exports.register = Asynchandler(async(req,res,next)=>{
+
     const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar,{
         folder : "avatars",
         width :150,
-        crop : "scale"
-    })
+        crop : "scale",
+    });
+
+    
     const {name,email,password } = req.body;
 
     const user = await User.create({
