@@ -1,5 +1,5 @@
 const app = require("./app.js");
-
+const cloudinary = require('cloudinary');
 const {config} = require("dotenv");
 const connectDb = require("./config/database.js");
 
@@ -16,6 +16,12 @@ config({
 })
 // always call after config
 connectDb();
+
+cloudinary.config({
+    cloud_name : process.env.CLOUDINARY_NAME,
+    api_key : process.env.API_KEY,
+    secret_key : process.env.SECRET_KEY,
+})
 
 const server = app.listen(process.env.PORT,()=>{
     console.log(`Port is listening ${process.env.PORT}`);

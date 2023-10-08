@@ -6,15 +6,16 @@ import LockOpenIcon from "@material-ui/icons/LockOpen"
 import { BiFace } from 'react-icons/bi';
 
 import { useDispatch, useSelector } from "react-redux";
-import { clearError, login } from "../actions/userAction";
+import { clearError, login, register } from "../actions/userAction";
 import { useAlert } from "react-alert"
-import Loading from "../loading/Loading"
-
+import Loading from "../loading/Loading";
+import { useNavigate } from 'react-router-dom';
 
 const LoginSignup = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const alert = useAlert();
-    const { error,loading } = useSelector(state => state.user);
+    const { error,loading, isAuthenticated } = useSelector(state => state.user);
 
     const registerTab =useRef(null);
     const loginTab = useRef(null);
@@ -54,8 +55,11 @@ const LoginSignup = () => {
         if(error){
             alert.error(error)
             dispatch(clearError());
+        };
+        if(isAuthenticated){
+            navigate("/account")
         }
-    },[dispatch,alert,error])
+    },[dispatch,alert,error ,navigate,isAuthenticated])
 
     const switchTabs = (e, tab) =>{
         if(tab === "login"){
@@ -90,7 +94,7 @@ const LoginSignup = () => {
         myForm.set("email", email)
         myForm.set("password", password)
         myForm.set("avatar", avatar)
-        console.log(`signupform submit`);
+        dispatch(register(myForm))
     }
 
 

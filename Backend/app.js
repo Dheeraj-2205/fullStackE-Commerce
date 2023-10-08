@@ -5,6 +5,9 @@ const order = require("./Routes/orderRoute.js")
 const app = express();
 const errorHandler = require ("./middleware/error.js");
 const cookieParser = require("cookie-parser");
+const bodyParser = require('body-parser');
+const fileUpload = require('express-fileupload');
+
 
 
 // const cors = require("cors");
@@ -12,6 +15,7 @@ const cookieParser = require("cookie-parser");
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(bodyParser.urlencoded({extended : true}));
 
 app.use("/mern", product);
 app.use("/mern", user)
