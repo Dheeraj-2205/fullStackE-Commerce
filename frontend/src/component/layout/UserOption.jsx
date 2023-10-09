@@ -5,6 +5,7 @@ import ListAltIcon from '@mui/icons-material/ListAlt';
 import PersonIcon from '@mui/icons-material/Person';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { logout } from '../actions/userAction';
 
 const UserOption = ({user}) => {
     const [open,setOpen] = useState(false);
@@ -34,7 +35,7 @@ const UserOption = ({user}) => {
     }
 
     function logoutUser (){
-      // dispatch(logout());
+      dispatch(logout());
       alert.success("Logout Successfully")
     }
 

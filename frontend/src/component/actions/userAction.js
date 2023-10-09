@@ -65,6 +65,22 @@ export const loadUser = () => async (dispatch) =>{
     }
 }
 
+
+// LOGOUT USER
+
+export const logout = () => async (dispatch) =>{
+    try {
+        
+        dispatch({type : LOAD_USER_REQUEST})
+
+        const {data} = await axios.get("http://localhost:4000/mern/logout")
+
+        dispatch({type : LOAD_USER_SUCCESS , payload : data})
+    } catch (error) {
+        dispatch({type : LOAD_USER_FAIL , payload : error.response.data.error})
+    }
+}
+
 export const clearError = () => async (dispatch) =>{
     dispatch({type : CLEAR_ERROR});
 }
