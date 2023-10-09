@@ -13,7 +13,7 @@ import {
 } from "../../constants/productConstants.js"
 
 export const fetchProduct = (q = "", currentPage = 1 ,price = [499 , 90000], category, rating=0) => async (dispatch) => {
-    console.log(category);
+
 
     try {
 
@@ -25,7 +25,6 @@ export const fetchProduct = (q = "", currentPage = 1 ,price = [499 , 90000], cat
             link = `http://localhost:4000/mern/products?q=${q}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&rating[gte]=${rating}`
         }
         const { data } = await axios.get(link);
-        console.log(data);
 
 
         dispatch({

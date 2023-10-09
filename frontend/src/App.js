@@ -16,7 +16,8 @@ import { useSelector } from 'react-redux';
 
 function App() {
 
-  const  {user,isAuthenticated}= useSelector(state => state);
+  const {user}= useSelector(state => state);
+  
   useEffect(()=>{
     webFont.load({
       google : {
@@ -29,7 +30,7 @@ function App() {
     <>
       <BrowserRouter>
         <Header/>
-        {isAuthenticated && <UserOption user = {user}/>}
+        {user.isAuthenticated && <UserOption user = {user}/>}
         <Routes>
           <Route index element = {<Home/>}/>
           <Route path = "/product/:id" element= {<ProductDetails/>}/>
