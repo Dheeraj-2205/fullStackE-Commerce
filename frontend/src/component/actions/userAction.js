@@ -73,7 +73,6 @@ export const loadUser = () => async (dispatch) =>{
 export const logout = () => async (dispatch) =>{
     try {
         
-
         await axios.get("http://localhost:4000/mern/logout")
 
         dispatch({type : LOGOUT_USER_SUCCESS})
