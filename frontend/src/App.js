@@ -1,6 +1,6 @@
 import "./App.css";
 import Header from "./component/layout/Header/Header";
-import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import webFont from "webfontloader";
 import { useEffect } from "react";
 import Footer from "./component/layout/Footer/Footer";
@@ -14,7 +14,7 @@ import { loadUser } from "./component/actions/userAction";
 import UserOption from "./component/layout/UserOption.jsx";
 import { useSelector } from "react-redux";
 import Profile from "./component/User/Profile.jsx";
-import ProtectedRoute from "./component/Route/ProtectedRoute";
+import UpdatedProfile from "./component/User/UpdatedProfile.jsx"
 
 function App() {
   const { user ,loading } = useSelector((state) => state);
@@ -51,6 +51,11 @@ function App() {
               path="/account"
               element = {<Profile/>}
             />
+            }
+            {
+              user.isAuthenticated && !loading && <Route
+                path = "/me/update/profile"
+              />
             }
           
         </Routes>

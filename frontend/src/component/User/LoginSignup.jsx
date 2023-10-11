@@ -66,7 +66,6 @@ const LoginSignup = () => {
             }
             reader.readAsDataURL(e.target.files[0]);
         } else {
-            console.log(user);
             setUser({ ...user, [e.target.name]: e.target.value })
         }
     }
