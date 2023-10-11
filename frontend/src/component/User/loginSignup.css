@@ -99,6 +99,7 @@
 
 #registerImage > img {
   width: 3vmax;
+  height: 3vmax;
   border-radius: 100%;
 }
 #registerImage > input {
@@ -160,7 +161,7 @@
   transform: translateX(100%);
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 650px) {
   .loginSignupContainer {
     background-color: white;
   }
@@ -171,8 +172,8 @@
   .login_signUp_toggle {
     height: 5vmax;
   }
-  .login_signUp_toggle > p {
-    font: 300 1.5vmax "Roboto";
+  .login_signUp_toggle p {
+    font: 300 1.5vmax "Roboto" !important;
   }
 
   .loginForm,
@@ -197,6 +198,7 @@
 
   #registerImage > img {
     width: 8vmax;
+    height: 8vmax;
     border-radius: 100%;
   }
 

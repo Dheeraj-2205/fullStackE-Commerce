@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import {  useSelector } from 'react-redux/es/hooks/useSelector'
 import { Link, useNavigate } from 'react-router-dom'
 import Loading from '../loading/Loading'
+import "./profile.css"
 const Profile = () => {
     const {user,loading,isAuthenticated} =useSelector((state) =>state.user);
     console.log(user);
@@ -15,31 +16,33 @@ const Profile = () => {
     <>
         {
             loading ? Loading : <>
-            <div>
-                <h1>Profile</h1>
-                <img src={user.avatar.url} alt="" />
-                <Link to = "/me/update">Edit Profile</Link>
+            <div className='profileContainer'>
+                <div>
+                    <h1>Profile</h1>
+                    <img src={user.avatar.url} alt="" />
+                    <Link to = "/me/update">Edit Profile</Link>
+                </div>
+                <div>
+                    <div >
+                        <h4>Full Name</h4>
+                        <p>{user.name}</p>
+                    </div>
+                    <div>
+                        <h4>Email</h4>
+                        <p>{user.email}</p>
+                    </div>
+                    <div>
+                        <h4>Joined On</h4>
+                        <p>{String(user.createdAt).substring(0,10)}</p>
+                    </div>
+        
+                    <div>
+                        <Link to = "/orders">My Orders</Link>
+                        <Link to = "/password/update">Change Password</Link>
+                    </div>
+                </div>
             </div>
     
-            <div>
-                <div>
-                    <h4>Full Name</h4>
-                    <p>{user.name}</p>
-                </div>
-                <div>
-                    <h4>Email</h4>
-                    <p>{user.email}</p>
-                </div>
-                <div>
-                    <h4>Joined On</h4>
-                    <p>{String(user.createdAt).substring(0,10)}</p>
-                </div>
-    
-                <div>
-                    <Link to = "/orders">My Orders</Link>
-                    <Link to = "/password/update">Change Password</Link>
-                </div>
-            </div>
         </>
         }
     </>
