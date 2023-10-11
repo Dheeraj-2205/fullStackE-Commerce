@@ -2,6 +2,7 @@ import React from "react";
 import { ReactNavbar } from "overlay-navbar";
 import { FaBeer } from 'react-icons/fa';
 import { Link } from "react-router-dom";
+import { positions } from "react-alert";
 const options = {
   burgerColorHover: "#eb4034",
   // logo,
@@ -36,14 +37,16 @@ const options = {
   cartIconMargin: "1vmax",
 };
 // 
+let style = {
+  positions : "absolute",
+  top : "20%"
+}
 const Header = () => {
   return (
     <>
     <ReactNavbar {...options} />
-      <div>
-        <div>Home</div>
-        <div>Products</div>
-        <div>Contacts</div>
+      <div style={style}>
+        
         <Link to = "/account"> Account</Link>
         <Link to = "/login">Login</Link>
       </div>
