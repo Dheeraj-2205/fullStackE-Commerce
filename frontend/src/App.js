@@ -14,9 +14,10 @@ import { loadUser } from "./component/actions/userAction";
 import UserOption from "./component/layout/UserOption.jsx";
 import { useSelector } from "react-redux";
 import Profile from "./component/User/Profile.jsx";
+import UpdatePassword from "./component/User/UpdatePassword.jsx";
 
 function App() {
-  const { user ,loading } = useSelector((state) => state);
+  const { user, loading ,} = useSelector((state) => state);
 
   useEffect(() => {
     webFont.load({
@@ -32,27 +33,27 @@ function App() {
         <Header />
         {user.isAuthenticated && <UserOption user={user} />}
         <Routes>
-          
-            <Route index element={<Home />} />
-            <Route path="/product/:id" element={<ProductDetails />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/products/:q" element={<Products />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/login" element={<LoginSignup />} />
+          <Route index element={<Home />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/products/:q" element={<Products />} />
+          <Route path="/search" element={<Search />} />
 
-            {/* <Route
+          {/* <Route
             path="/account"
             element={
               <ProtectedRoute><Profile/></ProtectedRoute>
             }
           /> */}
-            {user.isAuthenticated && !loading && <Route
-              path="/account"
-              element = {<Profile/>}
-            />
-            }
-            
-          
+          {user.isAuthenticated && !loading && (
+            <Route path="/account" element={<Profile />} />
+          )}
+
+          {user.isAuthenticated && !loading && (
+            <Route path="/password/update" element={<UpdatePassword />} />
+          )}
+
+          <Route path="/login" element={<LoginSignup />} />
         </Routes>
         <Footer />
       </BrowserRouter>
