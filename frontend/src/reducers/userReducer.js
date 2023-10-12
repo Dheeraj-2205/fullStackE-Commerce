@@ -88,14 +88,13 @@ export const userReducer = (state = { user: {} }, action) => {
 
 
 export const profileReducer = (state = {}, action) => {
+  console.log(action.type);
   switch (action.type) {
     case UPDATE_PROFILE_REQUEST:
-    
       return {
         ...state,
         loading : true
       };
-
     case UPDATE_PROFILE_SUCCESS :
       return {
         ...state,

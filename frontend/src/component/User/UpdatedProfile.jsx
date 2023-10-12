@@ -71,7 +71,7 @@ const UpdatedProfile = () => {
   return (
     <>
       {loading ? (
-        Loading
+        <Loading/>
       ) : (
         <>
           <div className="updataProfileContainer">
@@ -80,7 +80,7 @@ const UpdatedProfile = () => {
               <form
                 className="updateProfileForm"
                 encType="multipart/form-data"
-                onSubmit={(e) => updateSubmit(e.target.value)}
+                onSubmit={updateSubmit}
               >
                 <div className="updateProfileName">
                   <BiFace />
