@@ -13,8 +13,7 @@ import {
   LOGOUT_USER_FAIL,
   UPDATE_PROFILE_REQUEST,
   UPDATE_PROFILE_SUCCESS,
-  UPDATE_PROFILE_FAIL ,
-  UPDATE_PROFILE_RESET
+  UPDATE_PROFILE_FAIL,
 } from "../../constants/userConstants";
 
 import axios from "axios";
@@ -25,7 +24,10 @@ export const login = (email, password) => async (dispatch) => {
       type: LOGIN_REQUEST,
     });
 
-    const config = { headers: { "Content-Type": "application/json" }, credentials: 'include', };
+    const config = {
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+    };
 
     const { data } = await axios.post(
       "http://localhost:4000/mern/login",
@@ -45,16 +47,16 @@ export const register = (myForm) => async (dispatch) => {
 
     const config = {
       headers: { "Content-Type": "multipart/form-data" },
-      credentials: 'include',
+      credentials: "include",
     };
 
     const { data } = await axios.post(
-      "http://localhost:4000/mern/register", 
+      "http://localhost:4000/mern/register",
       myForm,
       config
     );
 
-    dispatch({ type: REGISTER_USER_SUCCESS, payload: data.user });
+    dispatch({ type: REGISTER_USER_SUCCESS, payload: data.success });
   } catch (error) {
     dispatch({ type: REGISTER_USER_FAIL, payload: error.response.data.error });
   }
@@ -66,7 +68,9 @@ export const loadUser = () => async (dispatch) => {
   try {
     dispatch({ type: LOAD_USER_REQUEST });
 
-    const { data } = await axios.get("http://localhost:4000/mern/me",{credentials: 'include',});
+    const { data } = await axios.get("http://localhost:4000/mern/me", {
+      credentials: "include",
+    });
 
     dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
   } catch (error) {
@@ -78,7 +82,9 @@ export const loadUser = () => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
   try {
-    await axios.get("http://localhost:4000/mern/logout", {credentials: 'include'});
+    await axios.get("http://localhost:4000/mern/logout", {
+      credentials: "include",
+    });
 
     dispatch({ type: LOGOUT_USER_SUCCESS });
   } catch (error) {
@@ -92,16 +98,16 @@ export const updateProfile = (userData) => async (dispatch) => {
 
     const config = {
       headers: { "Content-Type": "multipart/form-data" },
-      credentials: 'include',
     };
 
     const { data } = await axios.put(
-      "http://localhost:4000/mern/me/update/profile", 
-      config,
-      userData
+      "http://localhost:4000/mern/me/update/profile",
+      userData,
+      config
     );
+    console.log(data);
 
-    dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: data.user });
+    dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: data.success });
   } catch (error) {
     dispatch({ type: UPDATE_PROFILE_FAIL, payload: error.response.data.error });
   }

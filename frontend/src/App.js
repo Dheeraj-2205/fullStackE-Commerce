@@ -54,7 +54,7 @@ function App() {
             }
             {
               user.isAuthenticated && !loading && <Route
-                path = "/me/update/profile"
+                path = "/me/update" element = {<UpdatedProfile/>}
               />
             }
           

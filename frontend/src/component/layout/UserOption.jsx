@@ -7,7 +7,6 @@ import PersonIcon from "@mui/icons-material/Person";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { Backdrop } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
-import { Navigate } from "react-router-dom";
 import { logout } from "../actions/userAction";
 import { useDispatch } from "react-redux";
 import { useAlert } from "react-alert";
