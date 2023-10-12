@@ -14,7 +14,6 @@ import { loadUser } from "./component/actions/userAction";
 import UserOption from "./component/layout/UserOption.jsx";
 import { useSelector } from "react-redux";
 import Profile from "./component/User/Profile.jsx";
-import UpdatedProfile from "./component/User/UpdatedProfile.jsx"
 
 function App() {
   const { user ,loading } = useSelector((state) => state);
@@ -52,11 +51,7 @@ function App() {
               element = {<Profile/>}
             />
             }
-            {
-              user.isAuthenticated && !loading && <Route
-                path = "/me/update" element = {<UpdatedProfile/>}
-              />
-            }
+            
           
         </Routes>
         <Footer />

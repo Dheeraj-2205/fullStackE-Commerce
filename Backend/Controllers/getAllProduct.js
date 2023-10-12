@@ -2,8 +2,6 @@ const Product = require("../Models/productModel.js");
 const ErrorHander = require("../utils/errorHandling");
 const AsyncResolver = require("../middleware/asyncError.js");
 const ApiFeatures = require("../utils/apiFeature.js");
-const Newidea = require("../utils/apiFeature.js");
-const cloudinary = require('cloudinary');
 //Create Product => admin routes
 
 exports.createProduct = AsyncResolver(async (req, res, next) => {

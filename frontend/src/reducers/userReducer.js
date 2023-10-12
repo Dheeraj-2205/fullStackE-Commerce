@@ -11,10 +11,10 @@ import {
   LOAD_USER_FAIL,
   LOGOUT_USER_SUCCESS,
   LOGOUT_USER_FAIL,
-  UPDATE_PROFILE_REQUEST,
-  UPDATE_PROFILE_SUCCESS,
-  UPDATE_PROFILE_FAIL ,
-  UPDATE_PROFILE_RESET,
+  UPDATE_PASSWORD_FAIL,
+  UPDATE_PASSWORD_REQUEST,
+  UPDATE_PASSWORD_RESET,
+  UPDATE_PROFILE_SUCCESS
 
 } from "../constants/userConstants.js";
 
@@ -85,39 +85,3 @@ export const userReducer = (state = { user: {} }, action) => {
 };
 
 
-
-
-export const profileReducer = (state = {}, action) => {
-  console.log(action.type);
-  switch (action.type) {
-    case UPDATE_PROFILE_REQUEST:
-      return {
-        ...state,
-        loading : true
-      };
-    case UPDATE_PROFILE_SUCCESS :
-      return {
-        ...state,
-        loading: false,
-        isUpdated: action.payload
-      };
-    case UPDATE_PROFILE_FAIL:  
-      return {
-        ...state,
-        loading: false,
-        error: action.payload,
-      }; 
-    case UPDATE_PROFILE_RESET : 
-      return {
-        ...state,
-        isUpdated : false
-      }
-    case CLEAR_ERROR:
-      return {
-        ...state,
-        error: null,
-      };
-    default:
-      return state;
-  }
-};

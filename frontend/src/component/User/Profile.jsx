@@ -20,7 +20,6 @@ const Profile = () => {
                 <div>
                     <h1>Profile</h1>
                     <img src={user.avatar.url} alt="" />
-                    <Link to = "/me/update">Edit Profile</Link>
                 </div>
                 <div>
                     <div >

@@ -11,9 +11,6 @@ import {
   LOAD_USER_FAIL,
   LOGOUT_USER_SUCCESS,
   LOGOUT_USER_FAIL,
-  UPDATE_PROFILE_REQUEST,
-  UPDATE_PROFILE_SUCCESS,
-  UPDATE_PROFILE_FAIL,
 } from "../../constants/userConstants";
 
 import axios from "axios";
@@ -91,27 +88,10 @@ export const logout = () => async (dispatch) => {
     dispatch({ type: LOGOUT_USER_FAIL, payload: error.response.data.error });
   }
 };
-//  update profile
-export const updateProfile = (userData) => async (dispatch) => {
-  try {
-    dispatch({ type: UPDATE_PROFILE_REQUEST });
 
-    const config = {
-      headers: { "Content-Type": "multipart/form-data" },
-    };
 
-    const { data } = await axios.put(
-      "http://localhost:4000/mern/me/update/profile",
-      userData,
-      config
-    );
-    console.log(data);
 
-    dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: data.success });
-  } catch (error) {
-    dispatch({ type: UPDATE_PROFILE_FAIL, payload: error.response.data.error });
-  }
-};
+
 
 export const clearError = () => async (dispatch) => {
   dispatch({ type: CLEAR_ERROR });
