@@ -10,7 +10,7 @@ const fileUpload = require('express-fileupload');
 const cors = require('cors');
 
 const corsOptions = {
-    origin: 'http://localhost:3000', // Replace with your client's origin
+    origin: 'http://localhost:3001', // Replace with your client's origin
     credentials: true,
   };
   
@@ -27,6 +27,5 @@ app.use("/mern", order);
 
 // middleware for error Handling
 
-app.use(errorHandler)
-
+app.use(errorHandler);
 module.exports = app;

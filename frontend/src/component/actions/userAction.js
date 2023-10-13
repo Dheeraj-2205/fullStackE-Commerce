@@ -32,11 +32,11 @@ export const login = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "http://localhost:4000/mern/login",
+      "http://localhost:3000/mern/login",
       { email, password },
       config
     );
-
+      console.log(data);
     dispatch({ type: LOGIN_SUCCESS, payload: data.user });
   } catch (error) {
     dispatch({ type: LOGIN_FAIL, payload: error.response.data.error });
@@ -49,16 +49,15 @@ export const register = (myForm) => async (dispatch) => {
 
     const config = {
       headers: { "Content-Type": "multipart/form-data" },
-      credentials: "include",
     };
 
     const { data } = await axios.post(
-      "http://localhost:4000/mern/register",
+      "http://localhost:3000/mern/register",
       myForm,
       config
     );
 
-    dispatch({ type: REGISTER_USER_SUCCESS, payload: data.success });
+    dispatch({ type: REGISTER_USER_SUCCESS, payload: data.user });
   } catch (error) {
     dispatch({ type: REGISTER_USER_FAIL, payload: error.response.data.error });
   }
@@ -70,13 +69,13 @@ export const loadUser = () => async (dispatch) => {
   try {
     dispatch({ type: LOAD_USER_REQUEST });
 
-    const { data } = await axios.get("http://localhost:4000/mern/me", {
-      credentials: "include",
+    const { data } = await axios.get("http://localhost:3000/mern/me", {
     });
 
     dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
   } catch (error) {
-    dispatch({ type: LOAD_USER_FAIL, payload: error.response.data.error });
+    console.log(error);
+    dispatch({ type: LOAD_USER_FAIL, payload: error.message });
   }
 };
 
@@ -84,8 +83,8 @@ export const loadUser = () => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
   try {
-    await axios.get("http://localhost:4000/mern/logout", {
-      credentials: "include",
+    await axios.get("http://localhost:3000/mern/logout", {
+      
     });
 
     dispatch({ type: LOGOUT_USER_SUCCESS });
@@ -94,22 +93,28 @@ export const logout = () => async (dispatch) => {
   }
 };
 
-
 export const updatePassword = (passwords) => async (dispatch) => {
+  console.log(passwords);
   try {
     dispatch({ type: UPDATE_PASSWORD_REQUEST });
 
     const config = {
-      headers : {
-        "Content-Type" : "application/json"
-      }
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const { data } = await axios.post(
+      `http://localhost:3000/mern/me/password/update`,
+      passwords,
+      config
+    );
 
-    }
-    const { data } = await axios.post(`http://localhost:4000/mern/password/update` ,passwords , config);
-    
-    dispatch({ type : UPDATE_PASSWORD_SUCCESS ,payload : data.success})
+    dispatch({ type: UPDATE_PASSWORD_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({type : UPDATE_PASSWORD_FAIL , payload : error.response.data.error})
+    dispatch({
+      type: UPDATE_PASSWORD_FAIL,
+      payload: error.response.data.error,
+    });
   }
 };
 
