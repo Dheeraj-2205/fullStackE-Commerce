@@ -90,7 +90,8 @@ export const passwordReducer = (state = {} , action) =>{
     case UPDATE_PASSWORD_REQUEST : 
       return{
         ...state,
-        loading : true
+        loading : true,
+        
       }
     case UPDATE_PASSWORD_SUCCESS : 
       return {

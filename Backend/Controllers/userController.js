@@ -1,4 +1,4 @@
-const { send } = require("process");
+
 const Asynchandler = require("../middleware/asyncError.js");
 const User = require("../Models/userModel.js");
 const ErrorHandler = require("../utils/errorHandling.js");
@@ -58,8 +58,8 @@ exports.loginUser = Asynchandler(async (req, res, next) => {
 
 exports.logout = Asynchandler(async (req, res, next) => {
   res.cookie("token", null, {
-    httpOnly: true,
     expires: new Date(Date.now()),
+    httpOnly: true,
   });
   res.status(200).json({
     success: true,
