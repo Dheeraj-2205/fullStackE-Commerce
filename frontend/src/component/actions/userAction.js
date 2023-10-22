@@ -32,7 +32,7 @@ export const login = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "http://localhost:3000/mern/login",
+      "http://localhost:4000/mern/login",
       { email, password },
       config
     );
@@ -53,7 +53,7 @@ export const register = (myForm) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "http://localhost:3000/mern/register",
+      "http://localhost:4000/mern/register",
       myForm,
       config
     );
@@ -70,7 +70,7 @@ export const loadUser = () => async (dispatch) => {
   try {
     dispatch({ type: LOAD_USER_REQUEST });
 
-    const { data } = await axios.get("http://localhost:3000/mern/me", {});
+    const { data } = await axios.get("http://localhost:4000/mern/me", {});
 
     dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
   } catch (error) {
@@ -82,7 +82,7 @@ export const loadUser = () => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
   try {
-    await axios.get("http://localhost:3000/mern/logout", {});
+    await axios.get("http://localhost:4000/mern/logout", {});
 
     dispatch({ type: LOGOUT_USER_SUCCESS });
   } catch (error) {
@@ -97,7 +97,7 @@ export const updatePassword = (passwords) => async (dispatch) => {
     const cookie = Cookies.get('token');
     console.log(Cookies.get());
     
-    fetch("http://localhost:3000/mern/me/password/update", {
+    fetch("http://localhost:4000/mern/me/password/update", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${cookie}`,
