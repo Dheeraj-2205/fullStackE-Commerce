@@ -26,9 +26,16 @@ const Home = () => {
 
   const products = {
     name : "dheeraj",
-    image : [{url : "jaanu"}],
+    image : [{url : "joshi"}],
     price : 3000,
-    _id : "abhishek"
+    _id : "falkfr"
+  }
+
+  const options = {
+    name : "datto",
+    image : [{url : "simran datto"}],
+    price : 2000,
+    _id : "dheeraj"
   }
 
   return (
@@ -54,6 +61,15 @@ const Home = () => {
 
           <div className="container" id="container">
             <Product product={products}/>
+            <Product product={products}/>
+            <Product product={products}/>
+            <Product product={products}/>
+            <Product product={products}/>
+            <Product product={products}/>
+            <Product product={products}/>
+            <Product product={products}/>
+            <Product product={products}/>
+
             {/* {products &&
               products.map((product) => (
                 <ProductCard key={product._id} product={product} />

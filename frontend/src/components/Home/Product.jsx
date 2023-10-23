@@ -20,6 +20,8 @@ const Product = ({product}) => {
         </div>
         <span>{product.price}</span>
     </Link>
+
+    
   )
 }
 
