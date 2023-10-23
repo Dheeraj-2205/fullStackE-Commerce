@@ -9,6 +9,7 @@ import MetaData from "../layout/MetaData.jsx";
 import Loader from "../layout/Loader/Loader.jsx";
 import Product from "./Product";
 
+
 const Home = () => {
   let loading =false
   // const alert = useAlert();
@@ -30,13 +31,7 @@ const Home = () => {
     price : 3000,
     _id : "falkfr"
   }
-
-  const options = {
-    name : "datto",
-    image : [{url : "simran datto"}],
-    price : 2000,
-    _id : "dheeraj"
-  }
+  
 
   return (
     <>
@@ -69,6 +64,8 @@ const Home = () => {
             <Product product={products}/>
             <Product product={products}/>
             <Product product={products}/>
+
+            
 
             {/* {products &&
               products.map((product) => (

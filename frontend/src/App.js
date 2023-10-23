@@ -4,6 +4,7 @@ import WebFont from "webfontloader";
 import Header from "./components/layout/Header/Header";
 import Footer from "./components/layout/Footer/Footer";
 import Home from "./components/Home/HomeComponent";
+import "./App.css"
 
 function App() {
   useEffect(() => {
@@ -13,6 +14,8 @@ function App() {
       },
     });
   }, []);
+
+ 
 
 
   return (
