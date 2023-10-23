@@ -1,64 +1,31 @@
-import "./App.css";
-import Header from "./component/layout/Header/Header";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import webFont from "webfontloader";
-import { useEffect } from "react";
-import Footer from "./component/layout/Footer/Footer";
-import Home from "./component/Home/Home.jsx";
-import ProductDetails from "./component/Product/ProductDetails.jsx";
-import Products from "./component/Product/Product.jsx";
-import Search from "./component/Product/Search.jsx";
-import LoginSignup from "./component/User/LoginSignup";
-import store from "./store";
-import { loadUser } from "./component/actions/userAction";
-import UserOption from "./component/layout/UserOption.jsx";
-import { useSelector } from "react-redux";
-import Profile from "./component/User/Profile.jsx";
-import UpdatePassword from "./component/User/UpdatePassword.jsx";
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import WebFont from "webfontloader";
+import Header from "./components/layout/Header/Header";
+import Footer from "./components/layout/Footer/Footer";
+import Home from "./components/Home/HomeComponent";
 
 function App() {
-  const { user, loading ,} = useSelector((state) => state);
-
   useEffect(() => {
-    webFont.load({
+    WebFont.load({
       google: {
-        families: ["Roboto", "Chilanka"],
+        families: ["Lato","Roboto", "Droid Sans", "Open Sans" ,"Poppins","Source Sans Pro" ],
       },
     });
-    store.dispatch(loadUser());
   }, []);
+
+
   return (
     <>
-      <BrowserRouter>
-        <Header />
-        {user.isAuthenticated && <UserOption user={user} />}
+      <Router>
+        <Header/>
         <Routes>
-          <Route index element={<Home />} />
-          <Route path="/product/:id" element={<ProductDetails />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/products/:q" element={<Products />} />
-          <Route path="/search" element={<Search />} />
-
-          {/* <Route
-            path="/account"
-            element={
-              <ProtectedRoute><Profile/></ProtectedRoute>
-            }
-          /> */}
-          {user.isAuthenticated && !loading && (
-            <Route path="/account" element={<Profile />} />
-          )}
-
-          {user.isAuthenticated && !loading && (
-            <Route path="/password/update" element={<UpdatePassword />} />
-          )}
-
-          <Route path="/login" element={<LoginSignup />} />
+          <Route index element = {<Home/>} />
         </Routes>
-        <Footer />
-      </BrowserRouter>
+        <Footer/>
+      </Router>
     </>
-  );
+  )
 }
 
 export default App;

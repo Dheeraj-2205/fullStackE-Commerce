@@ -1,0 +1,68 @@
+import React, { useEffect } from "react";
+import { CgMouse } from "react-icons/cg";
+import "./HomeComponent.css";
+// import ProductCard from "./ProductCard.js";
+// import { clearErrors, getProduct } from "../../actions/productAction";
+// import { useSelector, useDispatch } from "react-redux";
+// import { useAlert } from "react-alert";
+import MetaData from "../layout/MetaData.jsx";
+import Loader from "../layout/Loader/Loader.jsx";
+import Product from "./Product";
+
+const Home = () => {
+  let loading =false
+  // const alert = useAlert();
+  // const dispatch = useDispatch();
+  // const { loading, error, products } = useSelector((state) => state.products);
+
+  // useEffect(() => {
+  //   if (error) {
+  //     alert.error(error);
+  //     dispatch(clearErrors());
+  //   }
+  //   dispatch(getProduct());
+  // }, [dispatch, error, alert]);
+
+
+  const products = {
+    name : "dheeraj",
+    image : [{url : "jaanu"}],
+    price : 3000,
+    _id : "abhishek"
+  }
+
+  return (
+    <>
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <MetaData title="ECOMMERCE" />
+
+          <div className="banner">
+            <p>Welcome to Ecommerce</p>
+            <h1>FIND AMAZING PRODUCTS BELOW</h1>
+
+            <a href="#container">
+              <button>
+                Scroll <CgMouse />
+              </button>
+            </a>
+          </div>
+
+          <h2 className="homeHeading">Featured Products</h2>
+
+          <div className="container" id="container">
+            <Product product={products}/>
+            {/* {products &&
+              products.map((product) => (
+                <ProductCard key={product._id} product={product} />
+              ))} */}
+          </div>
+        </>
+      )}
+    </>
+  );
+};
+
+export default Home;
